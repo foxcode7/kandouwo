@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Kandouwo" parent="@style/Theme.AppCompat.Light">
+        <item name="actionBarStyle">@style/Widget.ActionBar</item>
+        <item name="actionBarTabStyle">@style/Widget.ActionBarTab</item>
+        <item name="actionBarTabBarStyle">@style/Widget.ActionBarTabBar</item>
+        <item name="actionBarTabTextStyle">@style/Widget.ActionBarTabText</item>
+        <item name="homeAsUpIndicator">@drawable/ic_home_as_up_indicator</item>
+        <item name="actionBarItemBackground">@drawable/item_bg</item>
+        <item name="actionModeBackground">@drawable/bg_actionmode</item>
+        <item name="actionBarDivider">@drawable/divider</item>
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="App" parent="Theme.Kandouwo">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/background_color</item>
+        <item name="android:textColorSecondary">@color/black2</item>
+        <!--<item name="ptrShowIndicator">false</item>-->
+        <item name="android:divider">@drawable/gray_horizontal_separator</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <!--<item name="vpiTabPageIndicatorStyle">@style/Widget.MeituanTabPageIndicator</item>-->
+        <item name="android:editTextStyle">@style/Widget.EditText</item>
+        <item name="android:progressBarStyleSmall">@style/progress_bar_style_small</item>
+        <!--<item name="android:ratingBarStyle">@style/Widget.RatingBar.Large</item>-->
+        <!--<item name="android:ratingBarStyleSmall">@style/Widget.RatingBar.Small</item>-->
+        <!--<item name="android:listViewStyle">@style/Widget.ListView</item>-->
+    </style>
+
+    <style name="App.NoTitleBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="App.Welcome" parent="@style/App.NoTitleBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
+</resources>

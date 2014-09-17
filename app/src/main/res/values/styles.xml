@@ -5,4 +5,37 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="TextAppearance.ActionBar.Title" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="Widget.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="displayOptions">showTitle|showHome|homeAsUp</item>
+        <item name="background">@drawable/bg_actionbar</item>
+        <item name="icon">@drawable/ic_action_home</item>
+        <item name="titleTextStyle">@style/TextAppearance.ActionBar.Title</item>
+        <item name="indeterminateProgressStyle">@style/ActionBar.IndeterminateProgress</item>
+    </style>
+
+    <style name="Widget.ActionBarTab" parent="@style/Widget.AppCompat.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator</item>
+    </style>
+
+    <style name="Widget.ActionBarTabBar" parent="@style/Widget.AppCompat.Light.ActionBar.TabBar">
+        <item name="android:background">@drawable/tab_unselected</item>
+    </style>
+
+    <style name="Widget.ActionBarTabText" parent="@style/Widget.AppCompat.Light.ActionBar.TabText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/actionbar_tab_text_selector</item>
+    </style>
+
+    <style name="Widget.EditText" parent="android:Widget.EditText">
+        <item name="android:textSize">@dimen/text_size_h5</item>
+        <item name="android:textColor">@color/black1</item>
+        <item name="android:background">@drawable/bg_edit_selector</item>
+        <item name="android:textColorHint">@color/black4</item>
+    </style>
+
 </resources>

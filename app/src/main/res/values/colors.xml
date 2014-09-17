@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="background_color">#FFF0F0F0</color>
+    <color name="new_background_color">#FFFFFFFF</color>
+    <!--4.0设计规范-->
+    <color name="black1">#FF333333</color>
+    <color name="black2">#FF666666</color>
+    <color name="black3">#FF999999</color>
+    <color name="black4">#FFCCCCCC</color>
+    <color name="black_another">#FF888888</color>
+    <color name="black5">#5d5e5a</color>
+    <color name="black6">#F5F5F5</color>
+    <color name="white">#ffffff</color>
+    <color name="white1">#FAFAFA</color>
+    <color name="selector_black">#f2f2f2</color>
+
+    <color name="action_bar_disable">#FF66CCC3</color>
+
+    <color name="dealmap_group_category_active_color">#9e32B9AA</color>
+    <color name="red">#FFDB6633</color>
+    <color name="green">#FF32B9AA</color>
+    <color name="yellow">#FFF29900</color>
+    <color name="yellow_text_color">#FF9900</color>
+    <color name="dark_yellow">#FFFF6600</color>
+    <color name="light_yellow">#FFFFF4E7</color>
+    <color name="light_gray">#FFF5F6F8</color>
+    <color name="light_green">#FFC9EAE8</color>
+    <color name="third_exchange_tip_color">#FFE95830</color>
+
+    <color name="citylist_divider">#d8d8d8</color>
+    <color name="gray_light">#EAEAEA</color>
+    <color name="darker_yellow">#FFDC6D3C</color>
+    <color name="bg_gray">#D6D6D6</color>
+
+    <!-- 首页地图页面搜索结果条目按下去的颜色  -->
+    <color name="deal_map_result_list_pressed">#f7f7f7</color>
+
+    <!-- 座位图divider -->
+    <color name="seat_divider">#D0D0D0</color>
+
+    <!-- 线框颜色：灰色 -->
+    <color name="border_gray">#CCCCCC</color>
+    <color name="comment_item_selected_color">#FFE400</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="faint_yellow">#FFFBF4</color>
+
+    <color name="border_table">#D2D2D2</color>
+    <color name="new_border_table">#D8D8D8</color>
+    <color name="bg_table_title">#DEDEDE</color>
+    <color name="new_bg_table_subtitle">#F8F8F8</color>
+    <color name="bg_table_subtitle">#E9E9E9</color>
+    <color name="paytips_normal">#FF999999</color>
+    <color name="paytips_event">#FFF29900</color>
+    <color name="paytips_error">#FFFF0000</color>
+    <color name="search_hot_word">#ff5900</color>
+    <color name="filter_bottom_bg">#99000000</color>
+    <color name="calendar_divider_color">#FFD2D2D2</color>
+
+    <!-- 售票关闭提醒颜色 -->
+    <color name="tips_orange">#AA7711</color>
+    <color name="tips_background">#F1E9CF</color>
+    <color name="tips_stroke">#D5CAAE</color>
+    <color name="map_selected_poi">#0f84f4</color>
+    <color name="map_normal_poi">#EF4D0C</color>
+
+    <color name="list_item_disabled">#F8F8F8</color>
+
+    <color name="bg_swipelist_backview">#ff6b42</color>
+    <color name="bargain_text_enable_color">#ff6600</color>
+    <color name="hotel_green">#32baac</color>
+    <color name="hotel_driver">#D8D8D8</color>
+    <color name="hotel_filter">#333333</color>
+
+    <color name="orange">#FF9900</color>
+
+    <color name="hint_green">#55c6bb</color>
+
+    <color name="list_item_delete_color">#ffe0e0</color>
+    <color name="white3">#99dad4</color>
+
+    <!--旅游 -->
+    <color name="tour_green">#2eb6a8</color>
+</resources>
