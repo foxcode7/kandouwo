@@ -23,8 +23,8 @@
         <!--<item name="vpiTabPageIndicatorStyle">@style/Widget.MeituanTabPageIndicator</item>-->
         <item name="android:editTextStyle">@style/Widget.EditText</item>
         <item name="android:progressBarStyleSmall">@style/progress_bar_style_small</item>
-        <!--<item name="android:ratingBarStyle">@style/Widget.RatingBar.Large</item>-->
-        <!--<item name="android:ratingBarStyleSmall">@style/Widget.RatingBar.Small</item>-->
+        <item name="android:ratingBarStyle">@style/Widget.RatingBar.Large</item>
+        <item name="android:ratingBarStyleSmall">@style/Widget.RatingBar.Small</item>
         <!--<item name="android:listViewStyle">@style/Widget.ListView</item>-->
     </style>
 

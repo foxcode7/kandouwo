@@ -1,19 +1,28 @@
 package com.kindleren.kandouwo;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import com.kindleren.kandouwo.base.BaseActivity;
+import com.kindleren.kandouwo.search.SearchBookKeywordsActivity;
 
-public class MainActivity extends ActionBarActivity {
+import roboguice.inject.InjectView;
+
+public class MainActivity extends BaseActivity implements View.OnClickListener {
+
+    @InjectView(R.id.search_book_btn)
+    Button searchBookBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        searchBookBtn.setOnClickListener(this);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,5 +41,16 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.search_book_btn:
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, SearchBookKeywordsActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

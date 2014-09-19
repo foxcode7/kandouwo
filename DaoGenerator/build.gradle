@@ -1,5 +1,18 @@
 apply plugin: 'java'
 
+repositories{
+    maven {
+        url "http://nexus:8081/nexus/content/groups/public"
+    }
+    maven {
+        url "http://nexus:8081/nexus/content/groups/public-snapshots"
+    }
+    mavenLocal()
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.google.code.gson:gson:2.1'
+    compile 'de.greenrobot.daogenerator:greendao-gson-patch:1.0'
+    compile 'org.freemarker:freemarker:2.3.19'
 }

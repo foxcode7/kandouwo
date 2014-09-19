@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:displayOptions">showTitle|showHome|homeAsUp</item>
+        <item name="android:background">@drawable/bg_actionbar</item>
+        <item name="android:icon">@drawable/ic_action_home</item>
+        <item name="android:titleTextStyle">@style/TextAppearance.ActionBar.Title</item>
+        <item name="android:indeterminateProgressStyle">@style/ActionBar.IndeterminateProgress</item>
+    </style>
+</resources>

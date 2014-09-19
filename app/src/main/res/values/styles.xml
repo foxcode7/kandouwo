@@ -38,4 +38,32 @@
         <item name="android:textColorHint">@color/black4</item>
     </style>
 
+    <style name="Widget.RatingBar.Large" parent="android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_star_large</item>
+        <item name="android:minHeight">29dp</item>
+        <item name="android:maxHeight">29dp</item>
+    </style>
+
+    <style name="Widget.RatingBar.Small" parent="android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_star_small</item>
+        <item name="android:minHeight">14dp</item>
+        <item name="android:maxHeight">14dp</item>
+        <item name="android:isIndicator">true</item>
+    </style>
+
+    <!--<style name="Widget">-->
+        <!--<item name="android:textAppearance">?textAppearance</item>-->
+    <!--</style>-->
+    <!---->
+    <!--<style name="Widget.AbsListView">-->
+        <!--<item name="android:scrollbars">vertical</item>-->
+        <!--<item name="android:fadingEdge">vertical</item>-->
+    <!--</style>-->
+
+    <!--<style name="Widget.ListView" parent="Widget.AbsListView">-->
+        <!--<item name="android:listSelector">@android:drawable/list_selector_background</item>-->
+        <!--<item name="android:cacheColorHint">?android:attr/colorBackgroundCacheHint</item>-->
+        <!--<item name="android:divider">@android:drawable/divider_horizontal_dark_opaque</item>-->
+    <!--</style>-->
+
 </resources>
