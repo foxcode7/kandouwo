@@ -51,6 +51,16 @@
         <item name="android:isIndicator">true</item>
     </style>
 
+    <style name="BottomTab" parent="android:Widget.TextView">
+        <!--<item name="android:textAppearance">?android:textAppearanceSmall</item>-->
+        <item name="android:drawablePadding">0dp</item>
+        <item name="android:textSize">@dimen/text_size_h10</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_bottom_tab</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+
     <!--<style name="Widget">-->
         <!--<item name="android:textAppearance">?textAppearance</item>-->
     <!--</style>-->

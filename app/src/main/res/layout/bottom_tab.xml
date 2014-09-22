@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.actionbarsherlock.internal.widget.IcsLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/bottom_tabs_container"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_index_menu">
+
+    <TextView
+        android:id="@+id/home"
+        style="@style/BottomTab"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/tab_home_normal"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/hot"
+        style="@style/BottomTab"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/tab_hot_normal"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:id="@+id/search"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:duplicateParentState="true"
+            style="@style/BottomTab"
+            android:layout_width="match_parent"
+            android:drawableTop="@drawable/tab_search_normal"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/mine_tip"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_reminder"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="top|right"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/mine"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:duplicateParentState="true"
+            style="@style/BottomTab"
+            android:layout_width="match_parent"
+            android:drawableTop="@drawable/tab_usercenter_normal"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/settings_tip"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_reminder"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="4dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"/>
+    </FrameLayout>
+
+</com.actionbarsherlock.internal.widget.IcsLinearLayout>
