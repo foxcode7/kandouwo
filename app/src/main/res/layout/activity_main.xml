@@ -5,11 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/search_book_btn"
-        android:text="豆瓣搜书api测试"/>
     <FrameLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
