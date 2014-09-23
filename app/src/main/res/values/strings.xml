@@ -22,5 +22,7 @@
     <string name="text_password">密码</string>
     <string name="text_register">免费注册</string>
     <string name="text_quick_login">无账号快捷登录</string>
+    <string name="login_user_name_is_null">请输入Email或手机号</string>
+    <string name="login_password_is_null">请输入密码</string>
 
 </resources>

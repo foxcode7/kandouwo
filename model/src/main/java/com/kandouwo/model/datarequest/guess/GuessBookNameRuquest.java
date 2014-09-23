@@ -35,7 +35,6 @@ public class GuessBookNameRuquest extends RequestBase<DoubanSearchBook> {
         return Uri.parse(ApiConfig.baseDoubanApiUrl).buildUpon()
                 .appendEncodedPath(URL_PATH)
                 .appendQueryParameter("q", keywords)
-                .build()
                 .toString();
     }
 

@@ -3,8 +3,6 @@ package com.kandouwo.model.datarequest.douban;
 import android.net.Uri;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import com.kandouwo.model.ApiConfig;
 import com.kandouwo.model.datarequest.RequestBase;
 
@@ -18,7 +16,6 @@ import java.io.IOException;
  */
 public class DoubanSearchBookRequest extends RequestBase<DoubanSearchBook> {
     private static final String URL_PATH = "v2/book/search";
-
     private final String keywords;
 
     public DoubanSearchBookRequest(String keywords){
@@ -36,7 +33,6 @@ public class DoubanSearchBookRequest extends RequestBase<DoubanSearchBook> {
         return Uri.parse(ApiConfig.baseDoubanApiUrl).buildUpon()
                 .appendEncodedPath(URL_PATH)
                 .appendQueryParameter("q", keywords)
-                .build()
                 .toString();
     }
 
