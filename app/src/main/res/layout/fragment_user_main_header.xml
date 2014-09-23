@@ -32,8 +32,8 @@
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="110dp"
-            android:visibility="gone"
             android:orientation="vertical"
+            android:visibility="gone"
             android:layout_height="60dp">
             <TextView
                 android:layout_width="wrap_content"
@@ -75,11 +75,11 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:id="@+id/user_icon"
-            android:visibility="gone"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="5dp"
             android:layout_alignParentBottom="true"
             android:clickable="true"
+            android:visibility="gone"
             android:background="@drawable/ic_user_avatar_selector"/>
     </RelativeLayout>
 </LinearLayout>
