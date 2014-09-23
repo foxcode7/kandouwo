@@ -11,7 +11,7 @@
         style="@style/BottomTab"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:drawableTop="@drawable/tab_home_normal"
+        android:drawableTop="@drawable/tab_home_selector"
         android:layout_height="match_parent"/>
 
     <TextView
@@ -19,7 +19,7 @@
         style="@style/BottomTab"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:drawableTop="@drawable/tab_hot_normal"
+        android:drawableTop="@drawable/tab_hot_selector"
         android:layout_height="match_parent"/>
 
     <FrameLayout
@@ -32,7 +32,7 @@
             android:duplicateParentState="true"
             style="@style/BottomTab"
             android:layout_width="match_parent"
-            android:drawableTop="@drawable/tab_search_normal"
+            android:drawableTop="@drawable/tab_search_selector"
             android:layout_height="match_parent"/>
 
         <ImageView
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:src="@drawable/ic_reminder"
             android:layout_marginRight="25dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_gravity="top|right"/>
     </FrameLayout>
 
@@ -55,7 +55,7 @@
             android:duplicateParentState="true"
             style="@style/BottomTab"
             android:layout_width="match_parent"
-            android:drawableTop="@drawable/tab_usercenter_normal"
+            android:drawableTop="@drawable/tab_usercenter_selector"
             android:layout_height="match_parent"/>
 
         <ImageView
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:src="@drawable/ic_reminder"
             android:layout_marginRight="25dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"/>
     </FrameLayout>

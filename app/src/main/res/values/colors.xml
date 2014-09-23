@@ -4,6 +4,7 @@
     <color name="background_color">#FFF0F0F0</color>
     <color name="new_background_color">#FFFFFFFF</color>
     <!--4.0设计规范-->
+    <color name="black">#FF000000</color>
     <color name="black1">#FF333333</color>
     <color name="black2">#FF666666</color>
     <color name="black3">#FF999999</color>

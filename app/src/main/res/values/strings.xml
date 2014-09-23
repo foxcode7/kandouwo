@@ -2,10 +2,25 @@
 <resources>
 
     <string name="app_name">看豆窝</string>
+    <string name="main_home">主页</string>
+    <string name="main_hot">热门</string>
+    <string name="main_search">搜索</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="search_book_keywords">关键字查询</string>
     <string name="guess_book_name">猜测书名</string>
     <string name="guess_book_lable">请选择该封面对应的书名：</string>
+
+    <!-- 个人中心 -->
+    <string name="main_mine">个人中心</string>
+    <string name="text_new">NEW</string>
+    <string name="text_settings">设置</string>
+    <string name="text_login">登录</string>
+
+    <!-- 登录 -->
+    <string name="text_username">手机/邮箱/用户名</string>
+    <string name="text_password">密码</string>
+    <string name="text_register">免费注册</string>
+    <string name="text_quick_login">无账号快捷登录</string>
 
 </resources>
