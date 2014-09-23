@@ -32,21 +32,46 @@ public class DoubanBookInfo {
     private String ebook_url; //豆瓣阅读，该字段只在存在对应电子书时提供
     private String ebook_price;
 
-    public class Images{
-        private String small;
-        private String large;
-        private String medium;
+    public Images getImages() {
+        return images;
     }
 
-    public class Rating{
+    public class Images {
+
+        private String large;
+
+        public String getLarge() {
+            return large;
+        }
+
+        public void setLarge(String large) {
+            this.large = large;
+        }
+
+        private String small;
+
+
+        private String medium;
+
+        public String getSmall() {
+            return small;
+        }
+
+        public String getMedium() {
+            return medium;
+        }
+    }
+
+    public class Rating {
         private int max;
         private int numRaters;
         private String average;
         private int min;
     }
 
-    public class Tags{
+    public class Tags {
         private int count;
         private String name;
     }
+
 }

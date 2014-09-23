@@ -1,17 +1,22 @@
 package com.kindleren.kandouwo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.kindleren.kandouwo.base.BaseActivity;
+import com.kindleren.kandouwo.guess.GuessBookNameActivity;
 import com.kindleren.kandouwo.home.HomeFragment;
 import com.kindleren.kandouwo.hot.HotFragment;
 import com.kindleren.kandouwo.search.SearchFragment;
 import com.kindleren.kandouwo.user.UserMainFragment;
+
+import roboguice.inject.InjectView;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final int[] TAB_IDS = new int[]{R.id.home, R.id.hot, R.id.search, R.id.mine};
@@ -19,10 +24,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final String FRAGMENT_TAG_PREFIX = "MainActivityFragment_";
     private int currentTabIndex;
 
+    @InjectView(R.id.search_book_btn)
+    Button searchBookBtn;
+    @InjectView(R.id.guess_book_btn)
+    Button guessBookBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        searchBookBtn.setOnClickListener(this);
+        guessBookBtn.setOnClickListener(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
@@ -57,6 +69,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        if(v.getId()==R.id.guess_book_btn) {
+            Intent guessIntent = new Intent();
+            guessIntent.setClass(MainActivity.this, GuessBookNameActivity.class);
+            startActivity(guessIntent);
+        }
+
         int index = -1;
         for (int i = 0; i < TAB_IDS.length; i++) {
             if (v.getId() == TAB_IDS[i]) {
@@ -64,6 +83,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             }
         }
+
 
         if (index != -1) {
             if (index != currentTabIndex) {
@@ -100,10 +120,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case 0:
                 fragment = new HomeFragment();
                 break;
-            case 1: {
+            case 1:
                 fragment = new HotFragment();
                 break;
-            }
             case 2:
                 fragment = new SearchFragment();
                 break;
