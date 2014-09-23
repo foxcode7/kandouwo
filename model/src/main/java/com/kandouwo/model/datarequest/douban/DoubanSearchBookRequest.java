@@ -34,7 +34,7 @@ public class DoubanSearchBookRequest extends RequestBase<DoubanSearchBook> {
     protected String getUrl() {
         return Uri.parse(ApiConfig.baseDoubanApiUrl).buildUpon()
                 .appendEncodedPath(URL_PATH)
-                .appendQueryParameter("q", "abc")
+                .appendQueryParameter("q", keywords)
                 .build()
                 .toString();
     }
