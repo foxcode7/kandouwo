@@ -36,6 +36,13 @@
             android:label="@string/search_book_keywords">
         </activity>
 
+        <activity
+            android:name=".guess.GuessBookNameActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/guess_book_name">
+        </activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

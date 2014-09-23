@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false" android:drawable="@drawable/bg_cornered_disabled" />
+
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#2DAA99" />
+            <corners android:radius="2dp" />
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <solid android:color="@color/green" />
+            <corners android:radius="2dp" />
+        </shape>
+    </item>
+</selector>

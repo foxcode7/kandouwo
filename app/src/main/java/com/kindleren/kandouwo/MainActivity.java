@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.kindleren.kandouwo.base.BaseActivity;
+import com.kindleren.kandouwo.guess.GuessBookNameActivity;
 import com.kindleren.kandouwo.search.SearchBookKeywordsActivity;
 
 import roboguice.inject.InjectView;
@@ -16,12 +17,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @InjectView(R.id.search_book_btn)
     Button searchBookBtn;
+    @InjectView(R.id.guess_book_btn)
+    Button guessBookBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         searchBookBtn.setOnClickListener(this);
+        guessBookBtn.setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +55,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 intent.setClass(MainActivity.this, SearchBookKeywordsActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.guess_book_btn:
+                Intent guessIntent = new Intent();
+                guessIntent.setClass(MainActivity.this, GuessBookNameActivity.class);
+                startActivity(guessIntent);
         }
     }
 }
