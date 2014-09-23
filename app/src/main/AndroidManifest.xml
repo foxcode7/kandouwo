@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kindleren.kandouwo" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
     <application
         android:name="com.kindleren.kandouwo.KandouwoApplication"
         android:allowBackup="true"
@@ -39,6 +42,13 @@
         </activity>
 
         <activity
+            android:name=".guess.GuessBookNameActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/guess_book_name">
+        </activity>
+        <activity
             android:name=".login.LoginActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
@@ -47,5 +57,4 @@
         </activity>
 
     </application>
-
 </manifest>

@@ -1,12 +1,11 @@
-package com.kandouwo.model.datarequest.douban;
+package com.kandouwo.model.datarequest.guess;
 
 import android.net.Uri;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import com.kandouwo.model.ApiConfig;
 import com.kandouwo.model.datarequest.RequestBase;
+import com.kandouwo.model.datarequest.douban.DoubanSearchBook;
 
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -14,14 +13,15 @@ import org.apache.http.client.methods.HttpUriRequest;
 import java.io.IOException;
 
 /**
- * Created by foxcoder on 14-9-18.
+ * Created by xuezhangbin on 14-9-22.
  */
-public class DoubanSearchBookRequest extends RequestBase<DoubanSearchBook> {
+public class GuessBookNameRuquest extends RequestBase<DoubanSearchBook> {
+
     private static final String URL_PATH = "v2/book/search";
 
     private final String keywords;
 
-    public DoubanSearchBookRequest(String keywords){
+    public GuessBookNameRuquest(String keywords){
         this.keywords = keywords;
     }
 
@@ -30,7 +30,6 @@ public class DoubanSearchBookRequest extends RequestBase<DoubanSearchBook> {
         return null;//暂时不做本地化
     }
 
-    
     @Override
     protected String getUrl() {
         return Uri.parse(ApiConfig.baseDoubanApiUrl).buildUpon()
@@ -64,4 +63,5 @@ public class DoubanSearchBookRequest extends RequestBase<DoubanSearchBook> {
     public boolean isLocalValid() {
         return false;
     }
+
 }
