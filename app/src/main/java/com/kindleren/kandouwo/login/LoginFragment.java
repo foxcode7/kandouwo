@@ -1,8 +1,7 @@
-package com.kindleren.kandouwo.user;
+package com.kindleren.kandouwo.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,30 +11,20 @@ import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
 
 /**
- * Created by foxcoder on 14-9-22.
+ * Created by foxcoder on 14-9-23.
  */
-public class UserMainFragment extends BaseFragment {
+public class LoginFragment extends BaseFragment {
 
     @Inject
     private LayoutInflater inflater;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user_main, container, false);
+        return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if(savedInstanceState == null){
-            Fragment fragment = new UserMainHeaderFragment();
-            getChildFragmentManager().beginTransaction().replace(R.id.user_main_login_container, fragment).commitAllowingStateLoss();
-        }
     }
 }

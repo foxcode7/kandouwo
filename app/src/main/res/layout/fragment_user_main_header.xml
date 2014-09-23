@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/user_background_wall"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/background_wall"/>
+
+        <!--  登录按钮  -->
+        <Button
+            android:id="@+id/user_login_btn"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:text="@string/text_login"
+            android:background="@drawable/bg_cornered_green"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="110dp"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_height="60dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:text="自在的狐狸"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="积分: "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7071"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    K豆: "/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2020"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/user_icon"
+            android:visibility="gone"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true"
+            android:clickable="true"
+            android:background="@drawable/ic_user_avatar_selector"/>
+    </RelativeLayout>
+</LinearLayout>
