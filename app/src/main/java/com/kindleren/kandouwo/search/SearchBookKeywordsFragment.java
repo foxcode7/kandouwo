@@ -44,6 +44,8 @@ public class SearchBookKeywordsFragment extends BaseFragment implements LoaderMa
     @Override
     public void onLoadFinished(Loader<DoubanSearchBook> loader, DoubanSearchBook data) {
         if(data != null){
+            DoubanSearchBook ds = data;
+
             TextView textView = (TextView)getView().findViewById(R.id.isSuccess);
             textView.setText("莫言找到了");
         }

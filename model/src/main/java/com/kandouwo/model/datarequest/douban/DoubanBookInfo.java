@@ -73,4 +73,5 @@ public class DoubanBookInfo {
         private int count;
         private String name;
     }
+
 }

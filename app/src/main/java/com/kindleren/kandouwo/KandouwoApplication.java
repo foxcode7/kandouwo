@@ -3,11 +3,9 @@ package com.kindleren.kandouwo;
 import android.app.Application;
 
 import com.kandouwo.model.SharedPreferencesUtils;
-import com.kandouwo.model.dao.DaoSession;
 import com.kandouwo.model.datarequest.DefaultRequestFactory;
 
 import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import roboguice.RoboGuice;
 import roboguice.inject.RoboInjector;
