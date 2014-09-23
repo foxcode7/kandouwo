@@ -30,6 +30,7 @@ public class DoubanSearchBookRequest extends RequestBase<DoubanSearchBook> {
         return null;//暂时不做本地化
     }
 
+    
     @Override
     protected String getUrl() {
         return Uri.parse(ApiConfig.baseDoubanApiUrl).buildUpon()
