@@ -1,10 +1,13 @@
 package com.kandouwo.model.datarequest.login;
 
+import java.io.Serializable;
+
 /**
  * Created by foxcoder on 14-9-23.
  */
-public class User {
+public class User implements Serializable{
     String status;
+    String msg; //错误信息
     String uid;
     String img; //头像链接
     String username;
@@ -66,5 +69,14 @@ public class User {
 
     public void setDeposit(String deposit) {
         this.deposit = deposit;
+    }
+
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

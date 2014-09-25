@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.inject.Inject;
+import com.kandouwo.model.datarequest.login.User;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
 import com.kindleren.kandouwo.login.LoginActivity;
+import com.kindleren.kandouwo.login.LoginFragment;
 
 /**
  * Created by foxcoder on 14-9-23.
@@ -40,8 +42,17 @@ public class UserMainHeaderFragment extends BaseFragment implements View.OnClick
         if(v.getId() == R.id.user_login_btn){
             Intent intent = new Intent();
             intent.setClass(getActivity(), LoginActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 0);
             return;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == getActivity().RESULT_OK){
+            User user = (User) data.getSerializableExtra(LoginFragment.USER_INFO);
+            int a =0;
         }
     }
 }

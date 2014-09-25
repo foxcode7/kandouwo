@@ -88,19 +88,6 @@ public abstract class RequestBaseAdapter<T> extends RequestBase<T> {
         try {
             return super.execute(origin);
         } catch (SSLHandshakeException exception) {
-
-            // 中间人攻击出现的错误如下：
-            // 02-21 19:14:03.656:
-            // E/COM.SANKUAI.MEITUAN/Welcome.java:125(26133): main
-            // javax.net.ssl.SSLHandshakeException:
-            // java.security.cert.CertPathValidatorException: Trust anchor for
-            // certification path not found.
-            // 02-21 19:14:03.656:
-            // E/COM.SANKUAI.MEITUAN/Welcome.java:125(26133): Caused by:
-            // java.security.cert.CertificateException:
-            // java.security.cert.CertPathValidatorException: Trust anchor for
-            // certification path not found.
-
             // 根据异常类型进行判断，如果是SSLHandshakeException即中间人攻击出现的错误，就不再补发http请求了
             throw exception;
 
