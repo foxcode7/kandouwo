@@ -24,8 +24,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final String FRAGMENT_TAG_PREFIX = "MainActivityFragment_";
     private int currentTabIndex;
 
-    @InjectView(R.id.search_book_btn)
-    Button searchBookBtn;
     @InjectView(R.id.guess_book_btn)
     Button guessBookBtn;
 
@@ -33,7 +31,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        searchBookBtn.setOnClickListener(this);
         guessBookBtn.setOnClickListener(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
