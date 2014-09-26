@@ -25,6 +25,8 @@ public class UserCenter extends LoginObservable implements AccountProvider {
     private final Gson mGson;
     private final Context context;
 
+    private final String hello = "";
+    
     public UserCenter(Context context) {
         this.context = context;
         mPreferences = SharedPreferencesUtils.getUserSharedPreferences(context);
