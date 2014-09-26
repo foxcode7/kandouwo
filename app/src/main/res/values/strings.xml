@@ -16,6 +16,7 @@
     <string name="text_new">NEW</string>
     <string name="text_settings">设置</string>
     <string name="text_login">登录</string>
+    <string name="text_game">游戏</string>
 
     <!-- 登录 -->
     <string name="text_username">手机/邮箱/用户名</string>

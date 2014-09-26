@@ -1,6 +1,5 @@
 package com.kindleren.kandouwo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.kindleren.kandouwo.base.BaseActivity;
-import com.kindleren.kandouwo.guess.GuessBookNameActivity;
 import com.kindleren.kandouwo.home.HomeFragment;
 import com.kindleren.kandouwo.hot.HotFragment;
 import com.kindleren.kandouwo.search.SearchFragment;
@@ -24,14 +22,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final String FRAGMENT_TAG_PREFIX = "MainActivityFragment_";
     private int currentTabIndex;
 
-    @InjectView(R.id.guess_book_btn)
-    Button guessBookBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        guessBookBtn.setOnClickListener(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
@@ -66,12 +60,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
-        if(v.getId()==R.id.guess_book_btn) {
-            Intent guessIntent = new Intent();
-            guessIntent.setClass(MainActivity.this, GuessBookNameActivity.class);
-            startActivity(guessIntent);
-        }
 
         int index = -1;
         for (int i = 0; i < TAB_IDS.length; i++) {
