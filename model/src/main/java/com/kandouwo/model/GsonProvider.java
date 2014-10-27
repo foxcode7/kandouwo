@@ -11,7 +11,7 @@ public class GsonProvider {
     private final Gson gson;
 
     private GsonProvider(){
-        gson = new Gson();//这里对比美团没看明白
+        gson = new Gson();//这里对比看豆窝没看明白
     }
 
     public synchronized static GsonProvider getInstance() {

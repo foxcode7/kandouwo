@@ -13,8 +13,6 @@ public class LoginObservable {
 
     /**
      * 注册一个登录状态监听
-     *
-     * @author leidiqiu @ 2012-6-20 11:21:06
      */
     public void register(LoginObserver observer) {
         synchronized (mObservers) {
@@ -26,8 +24,6 @@ public class LoginObservable {
 
     /**
      * 注销一个登录状态监听
-     *
-     * @author leidiqiu @ 2012-6-20 11:21:30
      */
     public void unregister(LoginObserver observer) {
         if (observer != null) {
@@ -42,8 +38,6 @@ public class LoginObservable {
 
     /**
      * 登录状态发生了变化
-     *
-     * @param status
      */
     public void notifyChanged(LoginObserver.LoginStatus status) {
         synchronized (mObservers) {

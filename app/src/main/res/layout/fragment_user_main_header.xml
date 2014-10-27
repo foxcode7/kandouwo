@@ -28,7 +28,9 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"/>
 
+        <!--  用户信息  -->
         <LinearLayout
+            android:id="@+id/user_info"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="110dp"
@@ -36,6 +38,7 @@
             android:visibility="gone"
             android:layout_height="60dp">
             <TextView
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -47,13 +50,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="积分: "/>
 
                 <TextView
+                    android:id="@+id/score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="7071"/>
@@ -64,17 +67,18 @@
                     android:text="    K豆: "/>
 
                 <TextView
+                    android:id="@+id/kdou"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2020"/>
-                </LinearLayout>
-
             </LinearLayout>
 
+        </LinearLayout>
+
         <ImageView
+            android:id="@+id/user_icon"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:id="@+id/user_icon"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="5dp"
             android:layout_alignParentBottom="true"
