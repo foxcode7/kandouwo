@@ -1,5 +1,6 @@
 package com.kindleren.kandouwo.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -97,7 +98,7 @@ public class LoginFragment extends BaseAuthenticatedFragment implements View.OnC
         Bundle args = new Bundle();
         args.putSerializable(USER_INFO, user);
         intent.putExtras(args);
-        getActivity().setResult(getActivity().RESULT_OK, intent);
+        getActivity().setResult(Activity.RESULT_OK, intent);
         getActivity().finish();
     }
 

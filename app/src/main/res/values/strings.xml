@@ -26,4 +26,8 @@
     <string name="login_user_name_is_null">请输入Email或手机号</string>
     <string name="login_password_is_null">请输入密码</string>
 
+    <!--  kindle摄影区  -->
+    <string name="title_activity_camera">cameraActivity</string>
+    <string name="kindle_camera">Kindle摄影区</string>
+
 </resources>

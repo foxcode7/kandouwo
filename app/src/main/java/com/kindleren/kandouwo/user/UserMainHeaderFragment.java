@@ -1,12 +1,17 @@
 package com.kindleren.kandouwo.user;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.kandouwo.model.datarequest.login.User;
@@ -14,6 +19,9 @@ import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
 import com.kindleren.kandouwo.login.LoginActivity;
 import com.kindleren.kandouwo.login.LoginFragment;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by foxcoder on 14-9-23.
@@ -21,6 +29,7 @@ import com.kindleren.kandouwo.login.LoginFragment;
 public class UserMainHeaderFragment extends BaseFragment implements View.OnClickListener {
     @Inject
     private LayoutInflater inflater;
+    private Picasso picasso;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,7 +39,6 @@ public class UserMainHeaderFragment extends BaseFragment implements View.OnClick
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         if(getView() != null) {
             Button userLoginBtn = (Button) getView().findViewById(R.id.user_login_btn);
             userLoginBtn.setOnClickListener(this);
@@ -42,7 +50,7 @@ public class UserMainHeaderFragment extends BaseFragment implements View.OnClick
         if(v.getId() == R.id.user_login_btn){
             Intent intent = new Intent();
             intent.setClass(getActivity(), LoginActivity.class);
-            startActivityForResult(intent, 0);
+            startActivityForResult(intent, 1);
             return;
         }
     }
@@ -50,9 +58,38 @@ public class UserMainHeaderFragment extends BaseFragment implements View.OnClick
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == getActivity().RESULT_OK){
-            User user = (User) data.getSerializableExtra(LoginFragment.USER_INFO);
-            int a =0;
+        if(resultCode == Activity.RESULT_OK) {
+            User user = (User) data.getExtras().get(LoginFragment.USER_INFO);
+            showUserInfo(user);
         }
+    }
+
+    private void showUserInfo(User user){
+        Holder holder = new Holder();
+        holder.userIcon = (ImageView) getView().findViewById(R.id.user_icon);
+        holder.userName = (TextView) getView().findViewById(R.id.user_name);
+        holder.score = (TextView) getView().findViewById(R.id.score);
+        holder.kdou = (TextView) getView().findViewById(R.id.kdou);
+        holder.userInfo = (LinearLayout) getView().findViewById(R.id.user_info);
+        holder.userLoginBtn = (Button) getView().findViewById(R.id.user_login_btn);
+
+        holder.userLoginBtn.setVisibility(View.GONE);
+        holder.userInfo.setVisibility(View.VISIBLE);
+        holder.userIcon.setVisibility(View.VISIBLE);
+
+        holder.userName.setText(user.getUsername());
+        holder.score.setText(user.getDeposit());
+        holder.kdou.setText(user.getCredit());
+        picasso.with(getActivity()).load(user.getImg()).into(holder.userIcon);
+
+    }
+
+    public class Holder {
+        ImageView userIcon;
+        TextView userName;
+        TextView score;
+        TextView kdou;
+        LinearLayout userInfo;
+        Button userLoginBtn;
     }
 }

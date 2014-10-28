@@ -32,7 +32,7 @@ public class UserCenter extends LoginObservable implements AccountProvider {
     }
 
     /**
-     * 记录美团登录信息
+     * 记录看豆窝登录信息
      */
     public void login(User user) {
         if (user == null) {
@@ -46,7 +46,7 @@ public class UserCenter extends LoginObservable implements AccountProvider {
     }
 
     /**
-     * 退出美团登录，其实就是清除本地缓存的用户信息
+     * 退出看豆窝登录，其实就是清除本地缓存的用户信息
      */
     public void logout() {
         SharedPreferencesUtils.apply(mPreferences.edit().clear());

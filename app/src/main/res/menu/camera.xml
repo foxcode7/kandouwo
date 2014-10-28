@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/col1" android:title="展示1列" android:showAsAction="always|withText" />
+    <item android:id="@+id/col2" android:title="展示2列" android:showAsAction="always|withText" />
+    <item android:id="@+id/col3" android:title="展示3列" android:showAsAction="always|withText" />
+
+</menu>

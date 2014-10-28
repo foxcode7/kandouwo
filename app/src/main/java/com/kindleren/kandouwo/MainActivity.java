@@ -1,18 +1,23 @@
 package com.kindleren.kandouwo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.kindleren.kandouwo.base.BaseActivity;
+import com.kindleren.kandouwo.camera.CameraActivity;
 import com.kindleren.kandouwo.home.HomeFragment;
 import com.kindleren.kandouwo.hot.HotFragment;
 import com.kindleren.kandouwo.search.SearchFragment;
 import com.kindleren.kandouwo.user.UserMainFragment;
+
+import java.util.List;
 
 import roboguice.inject.InjectView;
 
@@ -52,7 +57,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_kindle_camera) {
+            Intent intent = new Intent();
+            intent.setClass(this, CameraActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -128,11 +136,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
         if (targetFragment == null) {
             targetFragment = createFragment(newTabIndex);
-            ft.add(R.id.main, targetFragment, genFragmentTag(newTabIndex));
+            ft.replace(R.id.main, targetFragment, genFragmentTag(newTabIndex));
         } else {
             ft.attach(targetFragment);
         }
         ft.commitAllowingStateLoss();
         getSupportFragmentManager().executePendingTransactions();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                fragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
     }
 }
