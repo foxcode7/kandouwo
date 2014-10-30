@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,9 @@ public class SearchFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_search, container, false);
+
     }
 
     @Override
@@ -65,10 +68,12 @@ public class SearchFragment extends BaseFragment {
 
         @Override
         public void onLoadFinished(Loader<List<HotWord>> loader, List<HotWord> strings) {
+
             if (strings==null||strings.isEmpty()) {
                 strings = loadHotWord();
             }
-            viewPager.setAdapter(new HotWordAdapter(getFragmentManager(), strings));
+            Log.e("再次点击搜索页","重新加载");
+            viewPager.setAdapter(new HotWordAdapter(getChildFragmentManager(), strings));
             if (viewPager.getAdapter().getCount() > 1) {
                 pageIndicator.setViewPager(viewPager);
                 pageIndicator.setFillColor(getResources().getColor(R.color.green));
@@ -112,6 +117,7 @@ public class SearchFragment extends BaseFragment {
 
         @Override
         public Fragment getItem(int position) {
+
             return new HotWordsFragment().newInstance(HotWordsController.getFragmentCounts(hotWords).get(position));
         }
 

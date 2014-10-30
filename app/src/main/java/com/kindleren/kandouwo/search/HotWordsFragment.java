@@ -1,6 +1,7 @@
 package com.kindleren.kandouwo.search;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +23,18 @@ import java.util.List;
 public class HotWordsFragment extends BaseFragment {
 
     public static HotWordsFragment newInstance(List<HotWord> hotWords) {
+        Log.e("settext", "HotWordsFragment");
         HotWordsFragment fragment = new HotWordsFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("hot_words", (java.util.ArrayList<? extends android.os.Parcelable>) hotWords);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Log.e("tag", "new onCreateView");
         LinearLayout linearLayout = new LinearLayout(getActivity());
         LinearLayout.LayoutParams containerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         linearLayout.setLayoutParams(containerParams);
@@ -52,6 +57,8 @@ public class HotWordsFragment extends BaseFragment {
                 count += spcae;
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, spcae);
                 if (hotWord != null) {
+                    Log.e("settext", hotWord.name);
+
                     textView.setText(hotWord.name);
                     if (!hotWord.isHot) {
                         textView.setClickable(true);
