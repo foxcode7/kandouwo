@@ -24,4 +24,8 @@ public class BaseConfig {
             displayInited = true;
         }
     }
+
+    public static int dp2px(int dp) {
+        return (int) (dp * density);
+    }
 }
