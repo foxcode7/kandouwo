@@ -17,13 +17,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by wuzhi on 14-5-4.
- */
+
 public class HotWordsFragment extends BaseFragment {
 
     public static HotWordsFragment newInstance(List<HotWord> hotWords) {
-        Log.e("settext", "HotWordsFragment");
         HotWordsFragment fragment = new HotWordsFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("hot_words", (java.util.ArrayList<? extends android.os.Parcelable>) hotWords);
@@ -33,8 +30,6 @@ public class HotWordsFragment extends BaseFragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        Log.e("tag", "new onCreateView");
         LinearLayout linearLayout = new LinearLayout(getActivity());
         LinearLayout.LayoutParams containerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         linearLayout.setLayoutParams(containerParams);
@@ -57,8 +52,6 @@ public class HotWordsFragment extends BaseFragment {
                 count += spcae;
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, spcae);
                 if (hotWord != null) {
-                    Log.e("settext", hotWord.name);
-
                     textView.setText(hotWord.name);
                     if (!hotWord.isHot) {
                         textView.setClickable(true);

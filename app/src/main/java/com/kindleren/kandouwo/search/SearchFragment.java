@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +71,6 @@ public class SearchFragment extends BaseFragment {
             if (strings==null||strings.isEmpty()) {
                 strings = loadHotWord();
             }
-            Log.e("再次点击搜索页","重新加载");
             viewPager.setAdapter(new HotWordAdapter(getChildFragmentManager(), strings));
             if (viewPager.getAdapter().getCount() > 1) {
                 pageIndicator.setViewPager(viewPager);
