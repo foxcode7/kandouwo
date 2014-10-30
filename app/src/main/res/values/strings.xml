@@ -30,4 +30,23 @@
     <string name="title_activity_camera">cameraActivity</string>
     <string name="kindle_camera">Kindle摄影区</string>
 
+    <!-- 搜索页 -->
+    <string name="text_search">搜索</string>
+
+    <!-- 热词 -->
+    <string-array name="search_hot_word">
+        <item>热门搜索</item>
+        <item>百年孤独</item>
+        <item>莫言</item>
+        <item>逻辑思维</item>
+        <item>韩寒</item>
+        <item>C语言</item>
+        <item>KTV</item>
+        <item>文艺复兴</item>
+        <item>Android</item>
+        <item>哈利波特</item>
+        <item>薛章斌</item>
+        <item>罗生门</item>
+    </string-array>
+
 </resources>

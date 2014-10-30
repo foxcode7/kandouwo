@@ -1,9 +1,8 @@
 package com.kindleren.kandouwo.camera;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,9 +12,8 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kindleren.kandouwo.R;
-
 import com.etsy.android.grid.StaggeredGridView;
+import com.kindleren.kandouwo.R;
 
 import java.util.ArrayList;
 

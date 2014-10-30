@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEFEF"
+    android:orientation="vertical" >
+    <GridView
+        android:id="@+id/hot_search_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:background="@color/border_gray"
+        android:verticalSpacing="1px"
+        android:horizontalSpacing="1px"
+        android:listSelector="#EFEFEF"/>
+    <View
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="@color/border_gray"/>
+</LinearLayout>

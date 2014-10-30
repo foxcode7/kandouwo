@@ -3,9 +3,91 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SearchFragment"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_hotel_search_edit"
+        android:id="@+id/header"
+        android:layout_gravity="top"
+        android:layout_height="46dp">
+
+        <ImageView
+            android:id="@+id/camera"
+            android:src="@drawable/tab_hot_normal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/search_hotel"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:paddingLeft="10dp"
+            android:hint="请输入搜索关键字"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textColorHint="@color/border_gray"
+            android:focusable="false"
+            android:background="@drawable/bg_search_edit_background"
+            android:drawableLeft="@drawable/ic_search" />
+
+        <Button
+            android:id="@+id/check_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:background="@null"
+            android:text="@string/text_search"
+            />
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content">
+                <com.kindleren.kandouwo.search.SearchPager
+                    android:id="@+id/pager"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/indicator_divider"
+                    android:visibility="gone"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray_light"
+                    android:layout_height="1px" />
+                <com.viewpagerindicator.CirclePageIndicator
+                    android:id="@+id/indicator"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:visibility="gone"
+                    android:layout_width="fill_parent"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
 
 </LinearLayout>
