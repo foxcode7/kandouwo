@@ -1,6 +1,7 @@
 package com.kindleren.kandouwo.search;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +17,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by wuzhi on 14-5-4.
- */
+
 public class HotWordsFragment extends BaseFragment {
 
     public static HotWordsFragment newInstance(List<HotWord> hotWords) {
         HotWordsFragment fragment = new HotWordsFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("hot_words", (java.util.ArrayList<? extends android.os.Parcelable>) hotWords);
+        fragment.setArguments(bundle);
         return fragment;
     }
 

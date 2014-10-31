@@ -44,7 +44,9 @@ public class SearchFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_search, container, false);
+
     }
 
     @Override
@@ -65,10 +67,11 @@ public class SearchFragment extends BaseFragment {
 
         @Override
         public void onLoadFinished(Loader<List<HotWord>> loader, List<HotWord> strings) {
+
             if (strings==null||strings.isEmpty()) {
                 strings = loadHotWord();
             }
-            viewPager.setAdapter(new HotWordAdapter(getFragmentManager(), strings));
+            viewPager.setAdapter(new HotWordAdapter(getChildFragmentManager(), strings));
             if (viewPager.getAdapter().getCount() > 1) {
                 pageIndicator.setViewPager(viewPager);
                 pageIndicator.setFillColor(getResources().getColor(R.color.green));
@@ -112,6 +115,7 @@ public class SearchFragment extends BaseFragment {
 
         @Override
         public Fragment getItem(int position) {
+
             return new HotWordsFragment().newInstance(HotWordsController.getFragmentCounts(hotWords).get(position));
         }
 
