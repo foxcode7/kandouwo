@@ -1,5 +1,6 @@
 package com.kindleren.kandouwo.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.inject.Inject;
 import com.kandouwo.model.datarequest.Request;
@@ -42,6 +44,10 @@ public class SearchFragment extends BaseFragment {
     @InjectView(R.id.indicator)
     private CirclePageIndicator pageIndicator;
 
+    @InjectView(R.id.camera)
+    private ImageView imageViewCamera;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -54,6 +60,18 @@ public class SearchFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
 
         getLoaderManager().initLoader(LOADER_ID_HOTWORD, null, hotWordLoader);
+        if(getView()!=null)
+        {
+            imageViewCamera.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), MipcaActivityCapture.class);
+                    startActivity(intent);
+                    return;
+                }
+            });
+        }
     }
 
 

@@ -50,4 +50,8 @@
         <item>杨鑫</item>
     </string-array>
 
+    <!-- 二维码 -->
+    <string name="scan_text">将图书条形码放入框内, 即可自动扫描</string>
+
+
 </resources>
