@@ -21,66 +21,80 @@ import android.os.Looper;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
-import com.google.zxing.ResultPointCallback;
 import com.kindleren.kandouwo.search.MipcaActivityCapture;
 
-import java.util.Hashtable;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 /**
  * This thread does all the heavy lifting of decoding the images.
- * �����߳�
+ * 
+ * @author dswitkin@google.com (Daniel Switkin)
  */
-final class DecodeThread extends Thread {
+public class DecodeThread extends Thread {
 
-  public static final String BARCODE_BITMAP = "barcode_bitmap";
-  private final MipcaActivityCapture activity;
-  private final Hashtable<DecodeHintType, Object> hints;
-  private Handler handler;
-  private final CountDownLatch handlerInitLatch;
+	public static final String BARCODE_BITMAP = "barcode_bitmap";
 
-  DecodeThread(MipcaActivityCapture activity,
-               Vector<BarcodeFormat> decodeFormats,
-               String characterSet,
-               ResultPointCallback resultPointCallback) {
+	public static final int BARCODE_MODE = 0X100;
+	public static final int QRCODE_MODE = 0X200;
+	public static final int ALL_MODE = 0X300;
 
-    this.activity = activity;
-    handlerInitLatch = new CountDownLatch(1);
+	private final MipcaActivityCapture activity;
+	private final Map<DecodeHintType, Object> hints;
+	private Handler handler;
+	private final CountDownLatch handlerInitLatch;
 
-    hints = new Hashtable<DecodeHintType, Object>(3);
+	public DecodeThread(MipcaActivityCapture activity, int decodeMode) {
 
-    if (decodeFormats == null || decodeFormats.isEmpty()) {
-    	 decodeFormats = new Vector<BarcodeFormat>();
-    	 decodeFormats.addAll(DecodeFormatManager.ONE_D_FORMATS);
-    	 decodeFormats.addAll(DecodeFormatManager.QR_CODE_FORMATS);
-    	 decodeFormats.addAll(DecodeFormatManager.DATA_MATRIX_FORMATS);
-    }
-    
-    hints.put(DecodeHintType.POSSIBLE_FORMATS, decodeFormats);
+		this.activity = activity;
+		handlerInitLatch = new CountDownLatch(1);
 
-    if (characterSet != null) {
-      hints.put(DecodeHintType.CHARACTER_SET, characterSet);
-    }
+		hints = new EnumMap<DecodeHintType, Object>(DecodeHintType.class);
 
-    hints.put(DecodeHintType.NEED_RESULT_POINT_CALLBACK, resultPointCallback);
-  }
+		Collection<BarcodeFormat> decodeFormats = new ArrayList<BarcodeFormat>();
+		decodeFormats.addAll(EnumSet.of(BarcodeFormat.AZTEC));
+		decodeFormats.addAll(EnumSet.of(BarcodeFormat.PDF_417));
 
-  Handler getHandler() {
-    try {
-      handlerInitLatch.await();
-    } catch (InterruptedException ie) {
-      // continue?
-    }
-    return handler;
-  }
+		switch (decodeMode) {
+		case BARCODE_MODE:
+			decodeFormats.addAll(DecodeFormatManager.getBarCodeFormats());
+			break;
 
-  @Override
-  public void run() {
-    Looper.prepare();
-    handler = new DecodeHandler(activity, hints);
-    handlerInitLatch.countDown();
-    Looper.loop();
-  }
+		case QRCODE_MODE:
+			decodeFormats.addAll(DecodeFormatManager.getQrCodeFormats());
+			break;
+
+		case ALL_MODE:
+			decodeFormats.addAll(DecodeFormatManager.getBarCodeFormats());
+			decodeFormats.addAll(DecodeFormatManager.getQrCodeFormats());
+			break;
+
+		default:
+			break;
+		}
+
+		hints.put(DecodeHintType.POSSIBLE_FORMATS, decodeFormats);
+	}
+
+	public Handler getHandler() {
+		try {
+			handlerInitLatch.await();
+		} catch (InterruptedException ie) {
+			// continue?
+		}
+		return handler;
+	}
+
+	@Override
+	public void run() {
+		Looper.prepare();
+		handler = new DecodeHandler(activity, hints);
+		handlerInitLatch.countDown();
+		Looper.loop();
+	}
 
 }

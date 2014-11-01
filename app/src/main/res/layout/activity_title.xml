@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingTop="20dp"
-    android:paddingBottom="30dp"
+    android:paddingBottom="50dp"
     >
 
     <ImageView
@@ -22,7 +22,7 @@
         android:layout_height="fill_parent"
         android:gravity="right">
     <ImageView
-        android:id="@+id/oepn_flash"
+        android:id="@+id/open_flash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="15dp"

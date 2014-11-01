@@ -74,7 +74,6 @@ public class SearchFragment extends BaseFragment {
         }
     }
 
-
     private LoaderManager.LoaderCallbacks hotWordLoader = new LoaderManager.LoaderCallbacks<List<HotWord>>() {
 
         @Override

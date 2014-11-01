@@ -1,106 +1,146 @@
 package com.kindleren.kandouwo.search;
 
+
 import android.app.Activity;
-import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
-import android.graphics.Bitmap;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Vibrator;
+import android.util.Log;
 import android.view.SurfaceHolder;
-import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.search.camera.CameraManager;
+import com.kindleren.kandouwo.search.decoding.BeepManager;
 import com.kindleren.kandouwo.search.decoding.CaptureActivityHandler;
+import com.kindleren.kandouwo.search.decoding.DecodeThread;
 import com.kindleren.kandouwo.search.decoding.InactivityTimer;
-import com.kindleren.kandouwo.search.view.ViewfinderView;
 
 import java.io.IOException;
-import java.util.Vector;
-/**
- * Initial the camera
- * @author Ryan.Tang
- */
-public class MipcaActivityCapture extends Activity implements Callback {
+import java.lang.reflect.Field;
 
+
+public final class MipcaActivityCapture extends Activity implements SurfaceHolder.Callback {
+
+    private static final String TAG = MipcaActivityCapture.class.getSimpleName();
+
+    private CameraManager cameraManager;
     private CaptureActivityHandler handler;
-    private ViewfinderView viewfinderView;
-    private boolean hasSurface;
-    private Vector<BarcodeFormat> decodeFormats;
-    private String characterSet;
     private InactivityTimer inactivityTimer;
-    private MediaPlayer mediaPlayer;
-    private boolean playBeep;
-    private static final float BEEP_VOLUME = 0.10f;
-    private boolean vibrate;
+    private BeepManager beepManager;
 
-    /**
-     * Called when the activity is first created.
-     */
+    private SurfaceView scanPreview = null;
+    private RelativeLayout scanContainer;
+    private RelativeLayout scanCropView;
+    private ImageView scanLine;
+
+    private Rect mCropRect = null;
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public CameraManager getCameraManager() {
+        return cameraManager;
+    }
+
+    private boolean isHasSurface = false;
+
+    private boolean isFlashOpen = false;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_capture);
-        //ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
-        CameraManager.init(getApplication());
-        viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
 
-        ImageView mButtonBack = (ImageView) findViewById(R.id.code_back);
-        mButtonBack.setOnClickListener(new OnClickListener() {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setContentView(R.layout.activity_capture);
+
+        scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
+        scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
+        scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
+        scanLine = (ImageView) findViewById(R.id.capture_scan_line);
+
+        inactivityTimer = new InactivityTimer(this);
+        beepManager = new BeepManager(this);
+
+        TranslateAnimation animation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT,
+                0.9f);
+        animation.setDuration(4500);
+        animation.setRepeatCount(-1);
+        animation.setRepeatMode(Animation.RESTART);
+        scanLine.startAnimation(animation);
+
+        ImageView imageViewBack = (ImageView) findViewById(R.id.code_back);
+        ImageView imageViewFlash = (ImageView) findViewById(R.id.open_flash);
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 MipcaActivityCapture.this.finish();
-
             }
         });
-        hasSurface = false;
-        inactivityTimer = new InactivityTimer(this);
+
+        imageViewFlash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cameraManager != null && !isFlashOpen) {
+                    cameraManager.openFlash(handler);
+                    Toast.makeText(getApplicationContext(),
+                            R.string.flash_open, Toast.LENGTH_LONG)
+                            .show();
+                    isFlashOpen = true;
+                } else {
+                    cameraManager.offFlash(handler);
+                    Toast.makeText(getApplicationContext(),
+                            R.string.flash_close, Toast.LENGTH_SHORT)
+                            .show();
+                    isFlashOpen = false;
+                }
+            }
+        });
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
-        SurfaceHolder surfaceHolder = surfaceView.getHolder();
-        if (hasSurface) {
-            initCamera(surfaceHolder);
+
+        cameraManager = new CameraManager(getApplication());
+        handler = null;
+        if (isHasSurface) {
+            initCamera(scanPreview.getHolder());
         } else {
-            surfaceHolder.addCallback(this);
-            surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+            scanPreview.getHolder().addCallback(this);
         }
-        decodeFormats = null;
-        characterSet = null;
-
-        playBeep = true;
-        AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
-        if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
-            playBeep = false;
-        }
-        initBeepSound();
-        vibrate = true;
-
+        inactivityTimer.onResume();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         if (handler != null) {
             handler.quitSynchronously();
             handler = null;
         }
-        CameraManager.get().closeDriver();
+        inactivityTimer.onPause();
+        beepManager.close();
+        cameraManager.closeDriver();
+        if (!isHasSurface) {
+            scanPreview.getHolder().removeCallback(this);
+        }
+        super.onPause();
     }
 
     @Override
@@ -109,120 +149,140 @@ public class MipcaActivityCapture extends Activity implements Callback {
         super.onDestroy();
     }
 
-    /**
-     * 处理扫描结果
-     *
-     * @param result
-     * @param barcode
-     */
-    public void handleDecode(Result result, Bitmap barcode) {
-        inactivityTimer.onActivity();
-        playBeepSoundAndVibrate();
-        String resultString = result.getText();
-        if (resultString.equals("")) {
-            Toast.makeText(MipcaActivityCapture.this, "Scan failed!", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent resultIntent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putString("result", resultString);
-            bundle.putParcelable("bitmap", barcode);
-            resultIntent.putExtras(bundle);
-            this.setResult(RESULT_OK, resultIntent);
-        }
-        MipcaActivityCapture.this.finish();
-    }
-
-    private void initCamera(SurfaceHolder surfaceHolder) {
-        try {
-            CameraManager.get().openDriver(surfaceHolder);
-        } catch (IOException ioe) {
-            return;
-        } catch (RuntimeException e) {
-            return;
-        }
-        if (handler == null) {
-            handler = new CaptureActivityHandler(this, decodeFormats,
-                    characterSet);
-        }
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width,
-                               int height) {
-
-    }
-
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        if (!hasSurface) {
-            hasSurface = true;
+        if (holder == null) {
+            Log.e(TAG, "*** WARNING *** surfaceCreated() gave us a null surface!");
+        }
+        if (!isHasSurface) {
+            isHasSurface = true;
             initCamera(holder);
         }
-
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        hasSurface = false;
+        isHasSurface = false;
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 
     }
 
-    public ViewfinderView getViewfinderView() {
-        return viewfinderView;
+    public void handleDecode(Result rawResult, Bundle bundle) {
+        inactivityTimer.onActivity();
+        beepManager.playBeepSoundAndVibrate();
+
+        bundle.putInt("width", mCropRect.width());
+        bundle.putInt("height", mCropRect.height());
+        bundle.putString("result", rawResult.getText());
+
+        //startActivity(new Intent(MipcaActivityCapture.this, ResultActivity.class).putExtras(bundle));
+
     }
 
-    public Handler getHandler() {
-        return handler;
-    }
+    private void initCamera(SurfaceHolder surfaceHolder) {
+        if (surfaceHolder == null) {
+            throw new IllegalStateException("No SurfaceHolder provided");
+        }
+        if (cameraManager.isOpen()) {
+            Log.w(TAG, "initCamera() while already open -- late SurfaceView callback?");
+            return;
+        }
+        try {
+            cameraManager.openDriver(surfaceHolder);
 
-    public void drawViewfinder() {
-        viewfinderView.drawViewfinder();
-
-    }
-
-    private void initBeepSound() {
-        if (playBeep && mediaPlayer == null) {
-            // The volume on STREAM_SYSTEM is not adjustable, and users found it
-            // too loud,
-            // so we now play on the music stream.
-            setVolumeControlStream(AudioManager.STREAM_MUSIC);
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mediaPlayer.setOnCompletionListener(beepListener);
-
-            AssetFileDescriptor file = getResources().openRawResourceFd(
-                    R.raw.beep);
-            try {
-                mediaPlayer.setDataSource(file.getFileDescriptor(),
-                        file.getStartOffset(), file.getLength());
-                file.close();
-                mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
-                mediaPlayer.prepare();
-            } catch (IOException e) {
-                mediaPlayer = null;
+            if (handler == null) {
+                handler = new CaptureActivityHandler(this, cameraManager, DecodeThread.ALL_MODE);
             }
+
+            initCrop();
+        } catch (IOException ioe) {
+            Log.w(TAG, ioe);
+            displayFrameworkBugMessageAndExit();
+        } catch (RuntimeException e) {
+            Log.w(TAG, "Unexpected error initializing camera", e);
+            displayFrameworkBugMessageAndExit();
         }
     }
 
-    private static final long VIBRATE_DURATION = 200L;
+    private void displayFrameworkBugMessageAndExit() {
+        // camera error
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.app_name));
+        builder.setMessage("");
+        builder.setPositiveButton("", new DialogInterface.OnClickListener() {
 
-    private void playBeepSoundAndVibrate() {
-        if (playBeep && mediaPlayer != null) {
-            mediaPlayer.start();
-        }
-        if (vibrate) {
-            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-            vibrator.vibrate(VIBRATE_DURATION);
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                finish();
+            }
+        });
+        builder.show();
+    }
+
+    public void restartPreviewAfterDelay(long delayMS) {
+        if (handler != null) {
+            handler.sendEmptyMessageDelayed(R.id.restart_preview, delayMS);
         }
     }
 
-    /**
-     * When the beep has finished playing, rewind to queue up another one.
-     */
-    private final OnCompletionListener beepListener = new OnCompletionListener() {
-        public void onCompletion(MediaPlayer mediaPlayer) {
-            mediaPlayer.seekTo(0);
+    public Rect getCropRect() {
+        return mCropRect;
+    }
+
+    private void initCrop() {
+        int cameraWidth = cameraManager.getCameraResolution().y;
+        int cameraHeight = cameraManager.getCameraResolution().x;
+
+
+        int[] location = new int[2];
+        scanCropView.getLocationInWindow(location);
+
+        int cropLeft = location[0];
+        int cropTop = location[1] - getStatusBarHeight();
+
+        int cropWidth = scanCropView.getWidth();
+        int cropHeight = scanCropView.getHeight();
+
+
+        int containerWidth = scanContainer.getWidth();
+        int containerHeight = scanContainer.getHeight();
+
+
+        int x = cropLeft * cameraWidth / containerWidth;
+
+        int y = cropTop * cameraHeight / containerHeight;
+
+
+        int width = cropWidth * cameraWidth / containerWidth;
+
+        int height = cropHeight * cameraHeight / containerHeight;
+
+
+        mCropRect = new Rect(x, y, width + x, height + y);
+    }
+
+    private int getStatusBarHeight() {
+        try {
+            Class<?> c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = Integer.parseInt(field.get(obj).toString());
+            return getResources().getDimensionPixelSize(x);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    };
+        return 0;
+    }
 
 }
