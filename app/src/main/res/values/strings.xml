@@ -50,4 +50,9 @@
         <item>杨鑫</item>
     </string-array>
 
+    <!-- 二维码 -->
+    <string name="code_hint">将图书条形码放入框中，即可自动完成扫描</string>
+    <string name="flash_open">闪光灯已开启</string>
+    <string name="flash_close">闪光灯已关闭</string>
+
 </resources>

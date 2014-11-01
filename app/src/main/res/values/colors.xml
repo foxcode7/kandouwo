@@ -83,4 +83,9 @@
 
     <!--旅游 -->
     <color name="tour_green">#2eb6a8</color>
+
+    <!-- 二维码 -->
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
 </resources>
