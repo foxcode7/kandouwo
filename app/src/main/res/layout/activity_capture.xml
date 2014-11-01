@@ -22,7 +22,7 @@
             android:background="@drawable/shadow" />
 
         <include
-            android:id="@+id/include1"
+            android:id="@+id/include_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -32,7 +32,7 @@
             android:id="@+id/capture_crop_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/include1"
+            android:layout_below="@id/include_title"
             android:layout_centerHorizontal="true" >
 
             <ImageView

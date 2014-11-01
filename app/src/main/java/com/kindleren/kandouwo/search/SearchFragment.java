@@ -47,7 +47,6 @@ public class SearchFragment extends BaseFragment {
     @InjectView(R.id.camera)
     private ImageView imageViewCamera;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -102,7 +101,6 @@ public class SearchFragment extends BaseFragment {
             }
         }
 
-
         private List<HotWord> loadHotWord() {
             List<HotWord> hotWordList = new ArrayList<HotWord>();
             String[] hotWords = getResources().getStringArray(R.array.search_hot_word);
@@ -114,7 +112,6 @@ public class SearchFragment extends BaseFragment {
             }
             return hotWordList;
         }
-
 
         @Override
         public void onLoaderReset(Loader<List<HotWord>> loader) {
@@ -141,5 +138,4 @@ public class SearchFragment extends BaseFragment {
             return HotWordsController.getFragmentCounts(hotWords).size();
         }
     }
-
 }

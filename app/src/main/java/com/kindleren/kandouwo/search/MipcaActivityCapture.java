@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 
-public final class MipcaActivityCapture extends Activity implements SurfaceHolder.Callback {
+public final class MipcaActivityCapture extends Activity implements SurfaceHolder.Callback, View.OnClickListener {
 
     private static final String TAG = MipcaActivityCapture.class.getSimpleName();
 
@@ -58,60 +58,18 @@ public final class MipcaActivityCapture extends Activity implements SurfaceHolde
     private boolean isHasSurface = false;
 
     private boolean isFlashOpen = false;
+    private ImageView imageViewBack;
+    private ImageView imageViewFlash;
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
 
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_capture);
-
-        scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
-        scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
-        scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
-        scanLine = (ImageView) findViewById(R.id.capture_scan_line);
-
-        inactivityTimer = new InactivityTimer(this);
-        beepManager = new BeepManager(this);
-
-        TranslateAnimation animation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT,
-                0.9f);
-        animation.setDuration(4500);
-        animation.setRepeatCount(-1);
-        animation.setRepeatMode(Animation.RESTART);
-        scanLine.startAnimation(animation);
-
-        ImageView imageViewBack = (ImageView) findViewById(R.id.code_back);
-        ImageView imageViewFlash = (ImageView) findViewById(R.id.open_flash);
-        imageViewBack.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                MipcaActivityCapture.this.finish();
-            }
-        });
-
-        imageViewFlash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (cameraManager != null && !isFlashOpen) {
-                    cameraManager.openFlash(handler);
-                    Toast.makeText(getApplicationContext(),
-                            R.string.flash_open, Toast.LENGTH_LONG)
-                            .show();
-                    isFlashOpen = true;
-                } else {
-                    cameraManager.offFlash(handler);
-                    Toast.makeText(getApplicationContext(),
-                            R.string.flash_close, Toast.LENGTH_SHORT)
-                            .show();
-                    isFlashOpen = false;
-                }
-            }
-        });
-
-
+        imageViewBack = (ImageView) findViewById(R.id.code_back);
+        imageViewFlash = (ImageView) findViewById(R.id.open_flash);
+        imageViewBack.setOnClickListener(this);
+        imageViewFlash.setOnClickListener(this);
     }
 
     @Override
@@ -176,10 +134,11 @@ public final class MipcaActivityCapture extends Activity implements SurfaceHolde
 
         bundle.putInt("width", mCropRect.width());
         bundle.putInt("height", mCropRect.height());
+
+        //扫码返回的结果
         bundle.putString("result", rawResult.getText());
-
+        //跳转到详情页的入口
         //startActivity(new Intent(MipcaActivityCapture.this, ResultActivity.class).putExtras(bundle));
-
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {
@@ -243,31 +202,19 @@ public final class MipcaActivityCapture extends Activity implements SurfaceHolde
     private void initCrop() {
         int cameraWidth = cameraManager.getCameraResolution().y;
         int cameraHeight = cameraManager.getCameraResolution().x;
-
-
         int[] location = new int[2];
         scanCropView.getLocationInWindow(location);
 
         int cropLeft = location[0];
         int cropTop = location[1] - getStatusBarHeight();
-
         int cropWidth = scanCropView.getWidth();
         int cropHeight = scanCropView.getHeight();
-
-
         int containerWidth = scanContainer.getWidth();
         int containerHeight = scanContainer.getHeight();
-
-
         int x = cropLeft * cameraWidth / containerWidth;
-
         int y = cropTop * cameraHeight / containerHeight;
-
-
         int width = cropWidth * cameraWidth / containerWidth;
-
         int height = cropHeight * cameraHeight / containerHeight;
-
 
         mCropRect = new Rect(x, y, width + x, height + y);
     }
@@ -285,4 +232,48 @@ public final class MipcaActivityCapture extends Activity implements SurfaceHolde
         return 0;
     }
 
+    @Override
+    public void onClick(View v) {
+
+        if (v.getId() == R.id.code_back) {
+            MipcaActivityCapture.this.finish();
+        }
+        if (v.getId() == R.id.open_flash) {
+            if (cameraManager != null && !isFlashOpen) {
+                cameraManager.openFlash(handler);
+                Toast.makeText(getApplicationContext(),
+                        R.string.flash_open, Toast.LENGTH_LONG)
+                        .show();
+                isFlashOpen = true;
+            } else {
+                cameraManager.offFlash(handler);
+                Toast.makeText(getApplicationContext(),
+                        R.string.flash_close, Toast.LENGTH_SHORT)
+                        .show();
+                isFlashOpen = false;
+            }
+        }
+    }
+
+    public void init()
+    {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setContentView(R.layout.activity_capture);
+
+        scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
+        scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
+        scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
+        scanLine = (ImageView) findViewById(R.id.capture_scan_line);
+
+        inactivityTimer = new InactivityTimer(this);
+        beepManager = new BeepManager(this);
+
+        TranslateAnimation animation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT,
+                0.9f);
+        animation.setDuration(4500);
+        animation.setRepeatCount(-1);
+        animation.setRepeatMode(Animation.RESTART);
+        scanLine.startAnimation(animation);
+    }
 }
