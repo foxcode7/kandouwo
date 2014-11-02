@@ -172,7 +172,7 @@ public class CameraManager {
         Camera theCamera = camera;
         if (theCamera != null) {
             Camera.Parameters parameters = theCamera.getParameters();
-            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
             theCamera.setParameters(parameters);
         }
     }

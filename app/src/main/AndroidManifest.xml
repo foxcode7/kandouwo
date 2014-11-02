@@ -71,6 +71,11 @@
             android:theme="@style/App.Welcome">
         </activity>
 
+        <activity
+            android:name=".search.decoding.ResultActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+
     </application>
 
 </manifest>
