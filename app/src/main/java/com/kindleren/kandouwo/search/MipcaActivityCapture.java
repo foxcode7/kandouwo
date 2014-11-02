@@ -4,6 +4,7 @@ package com.kindleren.kandouwo.search;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import com.kindleren.kandouwo.search.decoding.BeepManager;
 import com.kindleren.kandouwo.search.decoding.CaptureActivityHandler;
 import com.kindleren.kandouwo.search.decoding.DecodeThread;
 import com.kindleren.kandouwo.search.decoding.InactivityTimer;
+import com.kindleren.kandouwo.search.decoding.ResultActivity;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -138,7 +140,7 @@ public final class MipcaActivityCapture extends Activity implements SurfaceHolde
         //扫码返回的结果
         bundle.putString("result", rawResult.getText());
         //跳转到详情页的入口
-        //startActivity(new Intent(MipcaActivityCapture.this, ResultActivity.class).putExtras(bundle));
+        startActivity(new Intent(MipcaActivityCapture.this, ResultActivity.class).putExtras(bundle));
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {

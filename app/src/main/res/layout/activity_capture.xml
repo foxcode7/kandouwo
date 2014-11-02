@@ -17,7 +17,8 @@
         <ImageView
             android:id="@+id/capture_mask_top"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/capture_crop_view"
             android:layout_alignParentTop="true"
             android:background="@drawable/shadow" />
 
@@ -32,16 +33,14 @@
             android:id="@+id/capture_crop_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/include_title"
-            android:layout_centerHorizontal="true" >
+            android:layout_centerInParent="true"
+            >
 
             <ImageView
                 android:id="@+id/code_frame"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
                 android:src="@drawable/code_frame" />
 
             <ImageView
