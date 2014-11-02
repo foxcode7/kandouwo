@@ -14,7 +14,7 @@
 
         <ImageView
             android:id="@+id/camera"
-            android:src="@drawable/tab_hot_normal"
+            android:src="@drawable/barcode_scan"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
