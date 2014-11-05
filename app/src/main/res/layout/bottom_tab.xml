@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.actionbarsherlock.internal.widget.IcsLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.actionbarsherlock.internal.widget.IcsLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/bottom_tabs_container"
     android:layout_height="wrap_content"
@@ -9,14 +10,16 @@
     <TextView
         android:id="@+id/home"
         style="@style/BottomTab"
+        android:text="@string/main_home"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:drawableTop="@drawable/tab_home_selector"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/hot"
         style="@style/BottomTab"
+        android:text="@string/main_hot"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:drawableTop="@drawable/tab_hot_selector"
@@ -31,6 +34,7 @@
         <TextView
             android:duplicateParentState="true"
             style="@style/BottomTab"
+            android:text="@string/main_search"
             android:layout_width="match_parent"
             android:drawableTop="@drawable/tab_search_selector"
             android:layout_height="match_parent"/>
@@ -40,8 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_reminder"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="4dp"
             android:layout_gravity="top|right"/>
     </FrameLayout>
 
@@ -54,6 +58,7 @@
         <TextView
             android:duplicateParentState="true"
             style="@style/BottomTab"
+            android:text="@string/main_user"
             android:layout_width="match_parent"
             android:drawableTop="@drawable/tab_usercenter_selector"
             android:layout_height="match_parent"/>
@@ -62,8 +67,8 @@
             android:id="@+id/settings_tip"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_reminder"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="4dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"/>
     </FrameLayout>
