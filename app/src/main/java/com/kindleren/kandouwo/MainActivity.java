@@ -2,6 +2,7 @@ package com.kindleren.kandouwo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.kindleren.kandouwo.base.BaseActivity;
 import com.kindleren.kandouwo.camera.CameraActivity;
@@ -142,6 +144,33 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
         ft.commitAllowingStateLoss();
         getSupportFragmentManager().executePendingTransactions();
+    }
+
+    private long lastBackPressed;
+    final Handler handler = new Handler();
+    private Toast toast;
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            toast.cancel();
+        }
+    };
+    private static final long SHOW_DURATION = 2000l;
+
+    @Override
+    public void onBackPressed() {
+        if (toast == null) {
+            toast = Toast.makeText(this, R.string.exit_message, Toast.LENGTH_SHORT);
+        }
+        if (System.currentTimeMillis() - lastBackPressed < SHOW_DURATION) {
+            toast.cancel();
+            handler.removeCallbacks(runnable);
+            this.finish();
+        } else {
+            toast.show();
+            lastBackPressed = System.currentTimeMillis();
+            handler.postDelayed(runnable, SHOW_DURATION);
+        }
     }
 
     @Override
