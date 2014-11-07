@@ -13,6 +13,10 @@
     <string name="guess_book_name">猜测书名</string>
     <string name="guess_book_lable">请选择该封面对应的书名：</string>
 
+    <!-- 主页 -->
+    <string name="my_shelf_tab">我的书架</string>
+    <string name="local_shelf_tab">导入藏书</string>
+
     <!-- 个人中心 -->
     <string name="main_mine">个人中心</string>
     <string name="text_new">NEW</string>

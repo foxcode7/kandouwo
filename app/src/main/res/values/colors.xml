@@ -21,6 +21,7 @@
     <color name="dealmap_group_category_active_color">#9e32B9AA</color>
     <color name="red">#FFDB6633</color>
     <color name="green">#FF32B9AA</color>
+    <color name="blue">#00B9DD</color>
     <color name="yellow">#FFF29900</color>
     <color name="yellow_text_color">#FF9900</color>
     <color name="dark_yellow">#FFFF6600</color>
@@ -88,4 +89,7 @@
     <color name="result_view">#b0000000</color>
     <color name="viewfinder_mask">#60000000</color>
     <color name="possible_result_points">#c0ffff00</color>
+
+    <!--PagerSlidingTabStrip-->
+    <color name="background_tab_pressed">#6633B5E5</color>
 </resources>

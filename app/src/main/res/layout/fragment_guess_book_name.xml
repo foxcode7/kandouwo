@@ -50,7 +50,7 @@
         android:layout_marginLeft="10dp"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
-        android:background="@drawable/bg_cornered_green"
+        android:background="@drawable/bg_cornered_blue"
         android:gravity="center"
         android:textSize="@dimen/text_size_h3"
         android:textColor="@color/white"
