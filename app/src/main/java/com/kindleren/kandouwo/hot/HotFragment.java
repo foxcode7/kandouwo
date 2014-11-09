@@ -6,17 +6,21 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
+import com.kindleren.kandouwo.common.config.BaseConfig;
 import com.kindleren.kandouwo.utils.ListUtils;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
+import roboguice.inject.InjectView;
 import uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
 import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
@@ -25,14 +29,18 @@ import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
  * Created by foxcoder on 14-9-22.
  */
 public class HotFragment extends BaseFragment implements
-        OnRefreshListener {
+        OnRefreshListener, View.OnClickListener {
     @Inject
     private LayoutInflater inflater;
+
+    @InjectView(R.id.ad_indicator)
+    private CirclePageIndicator adPageIndicator;
 
     private PullToRefreshLayout mPullToRefreshLayout;
     private AutoScrollViewPager viewPager;
     private TextView indexText;
     private List<Integer> imageIdList;
+    private ImageView closeAdsBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,12 +72,29 @@ public class HotFragment extends BaseFragment implements
         imageIdList.add(R.drawable.ad_three);
         imageIdList.add(R.drawable.ad_four);
 
-        viewPager.setAdapter(new ImagePagerAdapter(getActivity(), imageIdList).setInfiniteLoop(true));
+        viewPager.setAdapter(new ImagePagerAdapter(getActivity(), imageIdList).setInfiniteLoop(false));
         viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 
         viewPager.setInterval(2000);
         viewPager.startAutoScroll();
         viewPager.setCurrentItem(Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % ListUtils.getSize(imageIdList));
+
+        closeAdsBtn = (ImageView) getView().findViewById(R.id.close_ads);
+        closeAdsBtn.setOnClickListener(this);
+
+        showAdPageIndicator();
+    }
+
+    private void showAdPageIndicator(){
+        if (viewPager.getAdapter().getCount() > 1) {
+            adPageIndicator.setViewPager(viewPager);
+            adPageIndicator.setFillColor(getResources().getColor(R.color.blue));
+            adPageIndicator.setPageColor(getResources().getColor(R.color.gray_light));
+            adPageIndicator.setRadius(BaseConfig.dp2px(4));
+            adPageIndicator.setVisibility(View.VISIBLE);
+        }else {
+            adPageIndicator.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -100,6 +125,18 @@ public class HotFragment extends BaseFragment implements
                 mPullToRefreshLayout.setRefreshComplete();
             }
         }.execute();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.close_ads:
+                if(getView() != null) {
+                    viewPager.stopAutoScroll();
+                    getView().findViewById(R.id.ad_container).setVisibility(View.GONE);
+                }
+                break;
+        }
     }
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {

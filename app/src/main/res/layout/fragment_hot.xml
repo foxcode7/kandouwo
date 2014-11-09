@@ -17,10 +17,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
-                android:id="@+id/ad_view"
-                android:layout_width="match_parent"
-                android:layout_height="100dp" />
+            <FrameLayout
+                android:id="@+id/ad_container"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp">
+
+                <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
+                    android:id="@+id/ad_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/close_ads"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/close_ads"/>
+
+                <com.viewpagerindicator.CirclePageIndicator
+                    android:id="@+id/ad_indicator"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_marginBottom="5dp"/>
+
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
