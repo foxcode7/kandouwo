@@ -2,16 +2,15 @@ package com.kindleren.kandouwo.hot;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
+import com.kindleren.kandouwo.base.widget.HorizontalListView;
 import com.kindleren.kandouwo.common.config.BaseConfig;
 import com.kindleren.kandouwo.utils.ListUtils;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -38,9 +37,31 @@ public class HotFragment extends BaseFragment implements
 
     private PullToRefreshLayout mPullToRefreshLayout;
     private AutoScrollViewPager viewPager;
-    private TextView indexText;
     private List<Integer> imageIdList;
     private ImageView closeAdsBtn;
+    private HorizontalListView freeBookHorizontalListView;
+
+    private FreeBookData[] freeBookDatas;
+
+
+    //------------------------------ 假数据 -------------------------------
+    private void initFreeBookData(){
+        freeBookDatas = new FreeBookData[]{
+            new FreeBookData(R.drawable.book_one_small, "C++ Primer1"),
+            new FreeBookData(R.drawable.book_two_small, "C++ Primer2"),
+            new FreeBookData(R.drawable.book_three_small, "C++ Primer3"),
+            new FreeBookData(R.drawable.book_one_small, "C++ Primer1"),
+            new FreeBookData(R.drawable.book_two_small, "C++ Primer2"),
+            new FreeBookData(R.drawable.book_three_small, "C++ Primer3"),
+        };
+    }
+    //--------------------------------------------------------------------
+
+    private void setupFreeBookList(){
+        initFreeBookData();
+        FreeBookAdapter adapter = new FreeBookAdapter(getActivity(), freeBookDatas);
+        freeBookHorizontalListView.setAdapter(adapter);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,16 +85,16 @@ public class HotFragment extends BaseFragment implements
                 .setup(mPullToRefreshLayout);
 
         viewPager = (AutoScrollViewPager) getView().findViewById(R.id.ad_view);
-        indexText = (TextView) getView().findViewById(R.id.view_pager_index);
 
+        //------------------------假数据-------------------------
         imageIdList = new ArrayList<Integer>();
         imageIdList.add(R.drawable.ad_one);
         imageIdList.add(R.drawable.ad_two);
         imageIdList.add(R.drawable.ad_three);
         imageIdList.add(R.drawable.ad_four);
+        //------------------------------------------------------
 
         viewPager.setAdapter(new ImagePagerAdapter(getActivity(), imageIdList).setInfiniteLoop(false));
-        viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 
         viewPager.setInterval(2000);
         viewPager.startAutoScroll();
@@ -83,8 +104,14 @@ public class HotFragment extends BaseFragment implements
         closeAdsBtn.setOnClickListener(this);
 
         showAdPageIndicator();
+
+        freeBookHorizontalListView = (HorizontalListView) getView().findViewById(R.id.free_book_list_view);
+        setupFreeBookList();
     }
 
+    /**
+     * 展示广告栏的指示器
+     */
     private void showAdPageIndicator(){
         if (viewPager.getAdapter().getCount() > 1) {
             adPageIndicator.setViewPager(viewPager);
@@ -137,21 +164,6 @@ public class HotFragment extends BaseFragment implements
                 }
                 break;
         }
-    }
-
-    public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
-
-        @Override
-        public void onPageSelected(int position) {
-            indexText.setText(new StringBuilder().append((position) % ListUtils.getSize(imageIdList) + 1).append("/")
-                    .append(ListUtils.getSize(imageIdList)));
-        }
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-
-        @Override
-        public void onPageScrollStateChanged(int arg0) {}
     }
 
     @Override
