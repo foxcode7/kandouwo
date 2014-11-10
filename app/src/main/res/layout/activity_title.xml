@@ -21,14 +21,15 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="right">
-    <ImageView
-        android:id="@+id/open_flash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
-        android:src="@drawable/code_flash_selector"
-        android:layout_alignBaseline="@+id/code_back"
-        android:layout_alignBottom="@+id/code_back"
-        android:textSize="18sp" />
+        <CheckBox
+            android:id="@+id/open_flash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/code_flash_selector"
+            android:layout_marginRight="15dp"
+            android:layout_alignBaseline="@+id/code_back"
+            android:layout_alignBottom="@+id/code_back"
+            style="@style/MyCheckBox"
+            />
     </LinearLayout>
 </LinearLayout>
