@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--  广告栏  -->
             <FrameLayout
                 android:id="@+id/ad_container"
                 android:layout_width="wrap_content"
@@ -42,13 +43,45 @@
                     android:layout_width="match_parent"
                     android:visibility="gone"
                     android:layout_marginBottom="5dp"/>
-
             </FrameLayout>
 
-            <com.kindleren.kandouwo.base.widget.HorizontalListView
-                android:id="@+id/free_book_list_view"
+            <!--  本周限免  -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp">
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="本周限免"
+                        android:textSize="@dimen/text_size_h18"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/black4"/>
+
+                <com.kindleren.kandouwo.base.widget.HorizontalListView
+                    android:id="@+id/free_book_list_view"
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
