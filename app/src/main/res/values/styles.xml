@@ -61,6 +61,12 @@
         <item name="android:paddingBottom">4dp</item>
     </style>
 
+    <style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+
+        <item name="android:button">@drawable/code_flash_selector</item>
+
+    </style>
+
     <!--<style name="Widget">-->
         <!--<item name="android:textAppearance">?textAppearance</item>-->
     <!--</style>-->

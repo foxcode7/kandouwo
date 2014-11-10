@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+    <TextView
+        android:id="@+id/all_book"
+        android:layout_width="50dp"
+        android:layout_height="130dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="30dp"
+        android:textSize="14sp"
+        android:textColor="@color/black2"
+        android:background="@drawable/bg_btn_book_top_booklist"
+        android:text="全\n部\n书\n籍"/>
+</LinearLayout>

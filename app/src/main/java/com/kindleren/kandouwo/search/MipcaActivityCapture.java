@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -61,7 +62,7 @@ public final class MipcaActivityCapture extends Activity implements SurfaceHolde
 
     private boolean isFlashOpen = false;
     private ImageView imageViewBack;
-    private ImageView imageViewFlash;
+    private CheckBox checkBoxFlash;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,9 +70,9 @@ public final class MipcaActivityCapture extends Activity implements SurfaceHolde
         init();
 
         imageViewBack = (ImageView) findViewById(R.id.code_back);
-        imageViewFlash = (ImageView) findViewById(R.id.open_flash);
+        checkBoxFlash = (CheckBox) findViewById(R.id.open_flash);
         imageViewBack.setOnClickListener(this);
-        imageViewFlash.setOnClickListener(this);
+        checkBoxFlash.setOnClickListener(this);
     }
 
     @Override

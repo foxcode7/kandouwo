@@ -20,6 +20,7 @@ import com.kandouwo.model.datarequest.search.SearchHotwordRequest;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
 import com.kindleren.kandouwo.base.RequestLoader;
+import com.kindleren.kandouwo.base.widget.HorizontalListView;
 import com.kindleren.kandouwo.common.config.BaseConfig;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -46,6 +47,35 @@ public class SearchFragment extends BaseFragment {
     @InjectView(R.id.camera)
     private ImageView imageViewCamera;
 
+
+    private HorizontalListView hotBookHorizontalListView;
+
+    private HotBookData[] hotBookDatas;
+
+    private List<Integer> imageIdList;
+
+
+    //------------------------------ 假数据 -------------------------------
+    private void initHotBookData(){
+        hotBookDatas = new HotBookData[]{
+                new HotBookData(R.drawable.book_one_small, ""),
+                new HotBookData(R.drawable.book_two_small, ""),
+                new HotBookData(R.drawable.book_three_small, ""),
+                new HotBookData(R.drawable.book_one_small, ""),
+                new HotBookData(R.drawable.book_two_small, ""),
+                new HotBookData(R.drawable.book_three_small, ""),
+        };
+    }
+    //--------------------------------------------------------------------
+
+    private void setupHotBookList(){
+        initHotBookData();
+        HotBookAdapter adapter = new HotBookAdapter(getActivity(), hotBookDatas);
+        hotBookHorizontalListView.setAdapter(adapter);
+    }
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -56,6 +86,17 @@ public class SearchFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //------------------------假数据-------------------------
+        imageIdList = new ArrayList<Integer>();
+        imageIdList.add(R.drawable.ad_one);
+        imageIdList.add(R.drawable.ad_two);
+        imageIdList.add(R.drawable.ad_three);
+        imageIdList.add(R.drawable.ad_four);
+        //-----------------------------------------
+
+        hotBookHorizontalListView = (HorizontalListView) getView().findViewById(R.id.free_book_list_view);
+        setupHotBookList();
 
         getLoaderManager().initLoader(LOADER_ID_HOTWORD, null, hotWordLoader);
         if(getView()!=null)
