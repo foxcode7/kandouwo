@@ -37,7 +37,6 @@ public class UserMainFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if(savedInstanceState == null){
             Fragment fragment = new UserMainHeaderFragment();
             getChildFragmentManager().beginTransaction().replace(R.id.user_main_login_container, fragment).commitAllowingStateLoss();

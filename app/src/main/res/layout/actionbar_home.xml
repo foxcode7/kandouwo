@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/actionbar_height"
+    android:background="@color/blue">
+
+    <com.kindleren.kandouwo.common.views.PagerSlidingTabStrip
+        android:id="@+id/pst_home"
+        android:layout_width="164dp"
+        android:layout_height="35dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/background_actionbar_tab"
+        android:padding="3dp"
+        android:textColor="@color/color_white_selected_blue"
+        android:textSize="14sp"
+        app:pstsDividerColor="@android:color/transparent"
+        app:pstsDividerPadding="0dp"
+        app:pstsIndicatorRes="@drawable/indicator_actionbar_tab"
+        app:pstsShouldExpand="true"
+        app:pstsTabBackground="@android:color/transparent"
+        app:pstsTabPaddingLeftRight="0dp"
+        app:pstsUnderlineHeight="0dp" />
+
+    <ImageView
+        android:id="@+id/iv_more"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="?attr/actionBarItemBackground"
+        android:padding="12dp"
+        android:src="@drawable/ic_search" />
+</RelativeLayout>

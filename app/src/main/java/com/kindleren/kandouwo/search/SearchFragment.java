@@ -2,7 +2,6 @@ package com.kindleren.kandouwo.search;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -55,7 +54,7 @@ public class SearchFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         getLoaderManager().initLoader(LOADER_ID_HOTWORD, null, hotWordLoader);
@@ -90,7 +89,7 @@ public class SearchFragment extends BaseFragment {
             viewPager.setAdapter(new HotWordAdapter(getChildFragmentManager(), strings));
             if (viewPager.getAdapter().getCount() > 1) {
                 pageIndicator.setViewPager(viewPager);
-                pageIndicator.setFillColor(getResources().getColor(R.color.green));
+                pageIndicator.setFillColor(getResources().getColor(R.color.blue));
                 pageIndicator.setPageColor(getResources().getColor(R.color.gray_light));
                 pageIndicator.setRadius(BaseConfig.dp2px(4));
                 pageIndicator.setVisibility(View.VISIBLE);
