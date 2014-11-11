@@ -38,13 +38,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".search.SearchBookKeywordsActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:label="@string/search_book_keywords"
-            android:launchMode="standard"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".guess.GuessBookNameActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/guess_book_name"
