@@ -1,22 +1,19 @@
 package com.kindleren.kandouwo.home;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.support.v4.view.ViewPager;
 
 import com.google.inject.Inject;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
 import com.kindleren.kandouwo.common.views.PagerSlidingTabStrip;
-import com.kindleren.kandouwo.search.SearchBookKeywordsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +21,7 @@ import java.util.List;
 /**
  * Created by foxcoder on 14-9-22.
  */
-public class HomeFragment extends BaseFragment implements View.OnClickListener {
+public class HomeFragment extends BaseFragment {
 
     @Inject
     private LayoutInflater inflater;
@@ -56,20 +53,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if(getView() != null) {
-            Button searchBookBtn = (Button) getView().findViewById(R.id.search_book_btn);
-            searchBookBtn.setOnClickListener(this);
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.search_book_btn){
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), SearchBookKeywordsActivity.class);
-            startActivity(intent);
-            return;
-        }
     }
 
     private static class HomeFragmentPagerAdapter extends FragmentPagerAdapter {
