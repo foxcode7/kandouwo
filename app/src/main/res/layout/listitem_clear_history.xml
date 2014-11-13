@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:background="@drawable/bg_deal_map_list_selector">
+    <TextView
+        android:textColor="#999999"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="13dp"
+        android:drawablePadding="8dp"
+        android:drawableLeft="@drawable/ic_clear_search_history"
+        android:text="@string/clear_history"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"/>
+</LinearLayout>
+
+
+
