@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/history"
+    style="@style/text_black_large"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_deal_map_list_selector"
+    android:drawableLeft="@drawable/ic_search_history"
+    android:drawablePadding="8dp"
+    android:padding="13dp"
+    android:singleLine="true"
+    android:textColor="#333333"
+    android:textSize="14sp" />

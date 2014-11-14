@@ -12,6 +12,7 @@
     <string name="search_book_keywords">关键字查询</string>
     <string name="guess_book_name">猜测书名</string>
     <string name="guess_book_lable">请选择该封面对应的书名：</string>
+    <string name="clear_history">清除历史记录</string>
 
     <!-- 主页 -->
     <string name="my_shelf_tab">我的书架</string>
@@ -32,7 +33,7 @@
     <string name="login_user_name_is_null">请输入Email或手机号</string>
     <string name="login_password_is_null">请输入密码</string>
 
-    <!--  kindle摄影区  -->
+    <!-- kindle摄影区 -->
     <string name="title_activity_camera">cameraActivity</string>
     <string name="kindle_camera">Kindle摄影区</string>
 
@@ -60,5 +61,6 @@
     <string name="code_hint">将图书条形码放入框中，即可自动完成扫描</string>
     <string name="flash_open">闪光灯已开启</string>
     <string name="flash_close">闪光灯已关闭</string>
+    <string name="title_activity_search_result">SearchResultActivity</string>
 
 </resources>

@@ -67,6 +67,22 @@
 
     </style>
 
+    <style name="default_listview">
+        <item name="android:divider">@drawable/separator_expandablelistview</item>
+        <item name="android:dividerHeight">1px</item>
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:cacheColorHint">#00000000</item>
+        <item name="android:footerDividersEnabled">true</item>
+    </style>
+
+    <style name="text_black">
+        <item name="android:textColor">@drawable/default_text_color</item>
+    </style>
+
+    <style name="text_black_large" parent="text_black">
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <!--<style name="Widget">-->
         <!--<item name="android:textAppearance">?textAppearance</item>-->
     <!--</style>-->
