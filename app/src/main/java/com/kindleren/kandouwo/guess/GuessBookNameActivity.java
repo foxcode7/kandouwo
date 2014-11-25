@@ -16,6 +16,6 @@ public class GuessBookNameActivity extends BaseActivity {
         setContentView(R.layout.activity_base_fragment);
 
         GuessBookNameFragment guessBookNameFragment = new GuessBookNameFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.content,guessBookNameFragment).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content, guessBookNameFragment).commitAllowingStateLoss();
     }
 }

@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.kindleren.kandouwo.base.BaseActivity;
@@ -21,8 +19,6 @@ import com.kindleren.kandouwo.user.UserMainFragment;
 
 import java.util.List;
 
-import roboguice.inject.InjectView;
-
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final int[] TAB_IDS = new int[]{R.id.home, R.id.hot, R.id.search, R.id.mine};
     private static final int[] TITLE_STRINGS = new int[]{R.string.main_home, R.string.main_hot, R.string.main_search, R.string.main_mine};
@@ -32,11 +28,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setHomeButtonEnabled(false);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//        getSupportActionBar().setHomeButtonEnabled(false);
+//        getSupportActionBar().setDisplayShowCustomEnabled(true);
 
         for (int id : TAB_IDS) {
             findViewById(id).setOnClickListener(this);

@@ -63,4 +63,12 @@
     <string name="flash_close">闪光灯已关闭</string>
     <string name="title_activity_search_result">SearchResultActivity</string>
 
+    <!-- 设置页面 -->
+    <string name="screen_light">屏幕亮度</string>
+    <string name="follow_system_light">跟随系统亮度</string>
+    <string name="read_show_notice_bar">阅读时显示通知栏</string>
+    <string name="check_for_update">检查软件更新</string>
+    <string name="user_help_notice">使用帮助</string>
+    <string name="suggest_back">意见反馈</string>
+    <string name="about_us">关于</string>
 </resources>

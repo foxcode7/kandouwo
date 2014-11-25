@@ -20,7 +20,7 @@ public class Welcome extends BaseActivity {
 
         handler = new Handler();
 
-        handler.postDelayed(new JumpRunnable(this), 2000l);
+        handler.postDelayed(new JumpRunnable(this), 100l);
     }
 
     private void jump(){

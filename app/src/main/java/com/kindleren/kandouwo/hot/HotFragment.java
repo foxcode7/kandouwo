@@ -117,7 +117,8 @@ public class HotFragment extends BaseFragment implements
             adPageIndicator.setViewPager(viewPager);
             adPageIndicator.setFillColor(getResources().getColor(R.color.blue));
             adPageIndicator.setPageColor(getResources().getColor(R.color.gray_light));
-            adPageIndicator.setRadius(BaseConfig.dp2px(4));
+            adPageIndicator.setStrokeWidth(0);
+            adPageIndicator.setRadius(BaseConfig.dp2px(3));
             adPageIndicator.setVisibility(View.VISIBLE);
         }else {
             adPageIndicator.setVisibility(View.GONE);

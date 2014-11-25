@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import com.google.inject.Inject;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
 import com.kindleren.kandouwo.guess.GuessBookNameActivity;
+import com.kindleren.kandouwo.settings.SettingsActivity;
 
 import java.util.List;
 
@@ -46,16 +46,22 @@ public class UserMainFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.user_settings).setOnClickListener(this);
         view.findViewById(R.id.user_settings_game).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = null;
+        Intent intent;
         switch(v.getId()){
+            case R.id.user_settings:
+                intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
+                break;
             case R.id.user_settings_game:
                 intent = new Intent(getActivity(), GuessBookNameActivity.class);
                 startActivity(intent);
+                break;
         }
     }
 

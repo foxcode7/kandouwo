@@ -12,6 +12,8 @@
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+
     <application
         android:name=".KandouwoApplication"
         android:allowBackup="true"
@@ -66,7 +68,15 @@
         <activity
             android:name=".search.decoding.ResultActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" />
+            android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/text_settings"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
