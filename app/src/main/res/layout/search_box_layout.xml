@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/camera"
+            android:src="@drawable/barcode_scan"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+
+        <com.kindleren.kandouwo.common.views.EditTextWithClearButton
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/search_edit"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textSize="14sp"
+            android:paddingLeft="10dp"
+            android:hint="请输入搜索关键字"
+            android:imeOptions="actionSearch"
+            android:layout_marginLeft="5dp"
+            android:singleLine="true"
+            android:layout_marginRight="5dp"
+            android:textColorHint="@color/border_gray"
+            android:focusable="true"
+            android:background="@drawable/bg_search_edit_background"
+            android:drawableLeft="@drawable/ic_search" />
+
+</LinearLayout>

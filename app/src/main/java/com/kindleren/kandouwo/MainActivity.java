@@ -5,17 +5,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBar;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.kindleren.kandouwo.base.BaseActivity;
-import com.kindleren.kandouwo.camera.CameraActivity;
+import com.kindleren.kandouwo.common.views.EditTextWithClearButton;
 import com.kindleren.kandouwo.home.HomeFragment;
 import com.kindleren.kandouwo.hot.HotFragment;
+import com.kindleren.kandouwo.search.MipcaActivityCapture;
 import com.kindleren.kandouwo.search.SearchFragment;
 import com.kindleren.kandouwo.user.UserMainFragment;
 
@@ -28,11 +28,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final int[] TITLE_STRINGS = new int[]{R.string.main_home, R.string.main_hot, R.string.main_search, R.string.main_mine};
     private static final String FRAGMENT_TAG_PREFIX = "MainActivityFragment_";
     private int currentTabIndex;
+    private View customeView;
+    @InjectView(R.id.camera)
+    private ImageView imageViewCamera;
+    private EditTextWithClearButton mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        customeView = getLayoutInflater().inflate(R.layout.search_box_layout, null);
+        imageViewCamera = (ImageView) customeView.findViewById(R.id.camera);
+        customeView.findViewById(R.id.search_edit).setOnClickListener(this);
+        mSearchView = (EditTextWithClearButton)customeView.findViewById(R.id.search_edit);
+        ((EditTextWithClearButton) customeView.findViewById(R.id.search_edit)).setClearButton(R.drawable.ic_search_clear_in_dealmap);
+        ((EditTextWithClearButton) customeView.findViewById(R.id.search_edit)).removeDrawableEmpty();
+
+        imageViewCamera.setOnClickListener(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
@@ -46,30 +59,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         changeTabState(0, -1);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_kindle_camera) {
-            Intent intent = new Intent();
-            intent.setClass(this, CameraActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//        if (id == R.id.action_kindle_camera) {
+//            Intent intent = new Intent();
+//            intent.setClass(this, CameraActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onClick(View v) {
+
+        if (v.getId() == R.id.camera) {
+            Intent intent = new Intent();
+            intent.setClass(this, MipcaActivityCapture.class);
+            startActivity(intent);
+            return;
+        }
 
         int index = -1;
         for (int i = 0; i < TAB_IDS.length; i++) {
@@ -87,6 +101,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 currentTabIndex = index;
             }
         }
+
+
     }
 
     private String genFragmentTag(int index) {
@@ -106,6 +122,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             findViewById(TAB_IDS[oldTabIndex]).setSelected(false);
         }
         findViewById(TAB_IDS[newTabIndex]).setSelected(true);
+
+        if (newTabIndex == 2) {
+            getSupportActionBar().setCustomView(customeView, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER_VERTICAL | Gravity.LEFT));
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+        } else {
+            getSupportActionBar().setCustomView(null);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+        if (newTabIndex == 3) {
+
+        }
+        if (newTabIndex == 0) {
+
+        }
+
+
+
     }
 
     private Fragment createFragment(int index) {

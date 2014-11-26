@@ -92,4 +92,6 @@
 
     <!--PagerSlidingTabStrip-->
     <color name="background_tab_pressed">#6633B5E5</color>
+
+    <item name="action_search" type="id"/>
 </resources>
