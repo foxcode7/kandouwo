@@ -1,6 +1,5 @@
 package com.kindleren.kandouwo.search;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,10 +11,11 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -59,9 +59,6 @@ public class SearchFragment extends BaseFragment {
     @InjectView(R.id.history)
     private ListView historyListView;
 
-    @InjectView(R.id.camera)
-    private ImageView imageViewCamera;
-
     private HorizontalListView hotBookHorizontalListView;
 
     private HotBookData[] hotBookDatas;
@@ -100,26 +97,19 @@ public class SearchFragment extends BaseFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_search, container, false);
-
-
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mSearchView = (EditTextWithClearButton) getView().findViewById(R.id.search_edit);
-        mSearchView.setClearButton(R.drawable.ic_search_clear_in_dealmap);
-        mSearchView.removeDrawableEmpty();
-        getView().findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                search();
-            }
-        });
     }
 
     @Override
@@ -142,17 +132,13 @@ public class SearchFragment extends BaseFragment {
         //网络请求预留方法------------------------------
 //        getLoaderManager().initLoader(LOADER_ID_HOTWORD, null, hotWordLoader);
         //--------------------------------------------
+    }
 
-        imageViewCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), MipcaActivityCapture.class);
-                startActivity(intent);
-                return;
-            }
-        });
-
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu_search, menu);
+//        MenuItem item = menu.findItem(R.id.action_search);
+//        item.setVisible(true);
     }
 
 

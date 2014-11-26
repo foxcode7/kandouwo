@@ -67,6 +67,8 @@
     <string name="flash_open">闪光灯已开启</string>
     <string name="flash_close">闪光灯已关闭</string>
     <string name="title_activity_search_result">SearchResultActivity</string>
+    <string name="title_activity_search__result_">Search_Result_Activity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- 设置页面 -->
     <string name="screen_light">屏幕亮度</string>
