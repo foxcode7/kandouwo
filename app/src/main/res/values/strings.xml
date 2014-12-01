@@ -17,6 +17,8 @@
     <!-- 主页 -->
     <string name="my_shelf_tab">我的书架</string>
     <string name="local_shelf_tab">导入藏书</string>
+    <string name="local_add_book">本地</string>
+    <string name="local_add_book_tip">随时随地在看豆窝导入本地好书</string>
 
     <!-- 个人中心 -->
     <string name="main_mine">个人中心</string>
@@ -24,6 +26,9 @@
     <string name="text_settings">设置</string>
     <string name="text_login">登录</string>
     <string name="text_game">游戏</string>
+    <string name="text_photo">照片墙</string>
+    <string name="text_read_history">我的阅历</string>
+    <string name="text_vip_center">会员中心</string>
 
     <!-- 登录 -->
     <string name="text_username">手机/邮箱/用户名</string>
@@ -34,7 +39,7 @@
     <string name="login_password_is_null">请输入密码</string>
 
     <!-- kindle摄影区 -->
-    <string name="title_activity_camera">cameraActivity</string>
+    <string name="title_activity_camera">照片墙</string>
     <string name="kindle_camera">Kindle摄影区</string>
 
     <!-- 搜索页 -->

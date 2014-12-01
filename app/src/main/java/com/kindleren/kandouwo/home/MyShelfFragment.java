@@ -35,17 +35,17 @@ public class MyShelfFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         images=new int[]{
-                R.drawable.book_one_small,R.drawable.book_one_small,
-                R.drawable.book_one_small,R.drawable.book_one_small,
-                R.drawable.book_one_small,R.drawable.book_one_small,
-                R.drawable.book_one_small,R.drawable.book_one_small,
-                R.drawable.book_one_small,R.drawable.book_one_small,
-                R.drawable.book_one_small,R.drawable.book_one_small,
-                R.drawable.book_one_small,R.drawable.book_one_small,
-                R.drawable.book_one_small,R.drawable.book_one_small,
-                R.drawable.book_one_small,R.drawable.book_one_small,
-                R.drawable.book_one_small,R.drawable.book_one_small,
-                R.drawable.book_one_small,R.drawable.book_one_small};
+                R.drawable.book_one_big,R.drawable.book_one_big,
+                R.drawable.book_one_big,R.drawable.book_one_big,
+                R.drawable.book_one_big,R.drawable.book_one_big,
+                R.drawable.book_one_big,R.drawable.book_one_big,
+                R.drawable.book_one_big,R.drawable.book_one_big,
+                R.drawable.book_one_big,R.drawable.book_one_big,
+                R.drawable.book_one_big,R.drawable.book_one_big,
+                R.drawable.book_one_big,R.drawable.book_one_big,
+                R.drawable.book_one_big,R.drawable.book_one_big,
+                R.drawable.book_one_big,R.drawable.book_one_big,
+                R.drawable.book_one_big,R.drawable.book_one_big};
         texts = new String[]{ "宫式布局1", "宫式布局2",
                 "宫式布局3", "宫式布局4",
                 "宫式布局5", "宫式布局6",

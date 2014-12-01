@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.google.inject.Inject;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
+import com.kindleren.kandouwo.camera.CameraActivity;
 import com.kindleren.kandouwo.guess.GuessBookNameActivity;
 import com.kindleren.kandouwo.settings.SettingsActivity;
 
@@ -48,6 +49,7 @@ public class UserMainFragment extends BaseFragment implements View.OnClickListen
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.user_settings).setOnClickListener(this);
         view.findViewById(R.id.user_settings_game).setOnClickListener(this);
+        view.findViewById(R.id.user_settings_photo).setOnClickListener(this);
     }
 
     @Override
@@ -60,6 +62,10 @@ public class UserMainFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.user_settings_game:
                 intent = new Intent(getActivity(), GuessBookNameActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.user_settings_photo:
+                intent = new Intent(getActivity(), CameraActivity.class);
                 startActivity(intent);
                 break;
         }

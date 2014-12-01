@@ -5,13 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.kindleren.kandouwo.base.BaseActivity;
-import com.kindleren.kandouwo.camera.CameraActivity;
 import com.kindleren.kandouwo.home.HomeFragment;
 import com.kindleren.kandouwo.hot.HotFragment;
 import com.kindleren.kandouwo.search.SearchFragment;
@@ -28,42 +25,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+        if(savedInstanceState == null) {
 
-        setContentView(R.layout.activity_main);
+            getSupportActionBar().hide();
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//        getSupportActionBar().setHomeButtonEnabled(false);
-//        getSupportActionBar().setDisplayShowCustomEnabled(true);
+            setContentView(R.layout.activity_main);
 
-        for (int id : TAB_IDS) {
-            findViewById(id).setOnClickListener(this);
+            for (int id : TAB_IDS) {
+                findViewById(id).setOnClickListener(this);
+            }
+
+            currentTabIndex = 0;
+            changeFragment(0, -1);
+            changeTabState(0, -1);
         }
-        currentTabIndex = 0;
-        changeFragment(0, -1);
-        changeTabState(0, -1);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_kindle_camera) {
-            Intent intent = new Intent();
-            intent.setClass(this, CameraActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
