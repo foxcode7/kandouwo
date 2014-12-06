@@ -1,5 +1,6 @@
 package com.kindleren.kandouwo.search;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -116,6 +117,8 @@ public class SearchFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        View view = getActionBar().getCustomView();
+        mSearchView = (EditTextWithClearButton)view.findViewById(R.id.search_edit);
 
         mSettingPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
@@ -173,14 +176,10 @@ public class SearchFragment extends BaseFragment {
         if (add2history) {
             add2SearchHistory(query);
         }
-//
-//        Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-//        intent.putExtra(SearchResultActivity.SEARCH_KEY, query);
-//        intent.putExtra(SearchResultActivity.SEARCH_FROM, searchType);
-//        intent.putExtra(SearchResultActivity.SEARCH_SOURCE, source);
-//        intent.putExtra(SearchResultActivity.SEARCH_CATE, getArguments().getLong(SearchResultActivity.SEARCH_CATE, -1));
-//
-//        startActivity(intent);
+
+        Intent intent = new Intent(getActivity(), SearchResultActivity.class);
+        intent.putExtra(SearchResultActivity.SEARCH_KEY, query);
+        startActivity(intent);
     }
 
     private View historyFooter;

@@ -42,9 +42,9 @@ configurations {
 dependencies {
     compile project(':model')
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile('com.github.chrisbanes.actionbarpulltorefresh:extra-abc:+') {
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-    }
+//    compile('com.github.chrisbanes.actionbarpulltorefresh:extra-abc:+') {
+//        exclude group: 'com.android.support', module: 'appcompat-v7'
+//    }
     compile('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude group: 'com.google.android', module: 'support-v4'
     }
@@ -57,4 +57,7 @@ dependencies {
     compile 'com.viewpagerindicator:library:2.4.2@aar'
     compile 'com.google.zxing:core:3.1.0'
     compile 'com.google.zxing:android-core:3.1.0'
+    compile('com.loopeer.android.thirdparty:pulltorefresh:2.1.1') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
 }

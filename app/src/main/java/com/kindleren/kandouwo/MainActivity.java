@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.kindleren.kandouwo.base.BaseActivity;
 import com.kindleren.kandouwo.common.views.EditTextWithClearButton;
 import com.kindleren.kandouwo.home.HomeFragment;
-import com.kindleren.kandouwo.hot.HotFragment;
+//import com.kindleren.kandouwo.hot.HotFragment;
 import com.kindleren.kandouwo.search.MipcaActivityCapture;
 import com.kindleren.kandouwo.search.SearchFragment;
 import com.kindleren.kandouwo.user.UserMainFragment;
@@ -149,7 +149,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 fragment = new HomeFragment();
                 break;
             case 1:
-                fragment = new HotFragment();
+                fragment = new HomeFragment();
                 break;
             case 2:
                 fragment = new SearchFragment();
