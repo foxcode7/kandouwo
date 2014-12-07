@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.inject.Inject;
 import com.kindleren.kandouwo.R;
@@ -21,13 +22,16 @@ import java.util.List;
 /**
  * Created by foxcoder on 14-9-22.
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements View.OnClickListener {
+
+    public static final String TAG_DIALOG_MORE_MENU = "more_menu_fragment";
 
     @Inject
     private LayoutInflater inflater;
 
     private ViewPager viewPager;
     private PagerSlidingTabStrip pstHome;
+    private ImageView moreImageView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class HomeFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.pager);
         pstHome = (PagerSlidingTabStrip) view.findViewById(R.id.pst_home);
+        moreImageView = (ImageView) view.findViewById(R.id.iv_more);
+        moreImageView.setOnClickListener(this);
 
         List<TabInfo> list = new ArrayList<TabInfo>();
         list.add(new TabInfo(MyShelfFragment.class, null, "我的书架"));
@@ -53,6 +59,31 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_more:
+                showMoreMenuDialogFragment();
+                break;
+        }
+    }
+
+    private void showMoreMenuDialogFragment(){
+        getChildFragmentManager().popBackStack();
+        Fragment fragment = getChildFragmentManager().findFragmentByTag(TAG_DIALOG_MORE_MENU);
+        if(fragment != null){
+            getChildFragmentManager().beginTransaction().remove(fragment).commitAllowingStateLoss();
+        } else {
+            fragment = new MoreDiaglogFragment();
+            getChildFragmentManager().beginTransaction().
+                    addToBackStack(TAG_DIALOG_MORE_MENU).
+                    replace(R.id.menu_area, fragment, TAG_DIALOG_MORE_MENU)
+                    .commitAllowingStateLoss();
+        }
     }
 
     private static class HomeFragmentPagerAdapter extends FragmentPagerAdapter {

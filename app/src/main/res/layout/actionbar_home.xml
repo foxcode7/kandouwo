@@ -29,5 +29,5 @@
         android:layout_alignParentRight="true"
         android:background="?attr/actionBarItemBackground"
         android:padding="12dp"
-        android:src="@drawable/ic_search" />
+        android:src="@drawable/ic_more" />
 </RelativeLayout>
