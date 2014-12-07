@@ -51,20 +51,21 @@ public class SearchResultFragment extends PagedItemListFragment<List<DoubanBookI
         if (getArguments() != null) {
             mSearchText = getArguments().getString(TEXT);
         }
-
         getLoaderManager().initLoader(PAGE_LOADER_ID, null, this);
     }
 
+    private Exception exception;
+
     @Override
-    public void onLoadFinished(Loader<List<DoubanBookInfo>> loader, List<DoubanBookInfo> data) {
-        super.onLoadFinished(loader, data, null);
+    public void onLoadFinished(Loader<List<DoubanBookInfo>> loader, List<DoubanBookInfo> data, Exception exception) {
+        super.onLoadFinished(loader, data, exception);
+        this.exception = exception;
     }
 
     @Override
     protected List<DoubanBookInfo> getList(List<DoubanBookInfo> doubanBookInfos) {
         return doubanBookInfos;
     }
-
 
     @Override
     protected void refresh() {
@@ -88,5 +89,17 @@ public class SearchResultFragment extends PagedItemListFragment<List<DoubanBookI
     @Override
     protected PageLoader<List<DoubanBookInfo>> createPageLoader(PageIterator<List<DoubanBookInfo>> pageIterator) {
         return new PageLoader<List<DoubanBookInfo>>(getActivity(), pageIterator);
+    }
+
+    @Override
+    protected void bindLoadFinishedData(List<DoubanBookInfo> mData) {
+        if (exception == null) {
+            getListAdapter().setData(mData);
+        }
+    }
+
+    @Override
+    public SearchResultAdapter getListAdapter() {
+        return (SearchResultAdapter)super.getListAdapter();
     }
 }

@@ -21,7 +21,9 @@ public abstract class ModelItemListFragment<D, I> extends BaseListFragment imple
     @Override
     public void onLoadFinished(Loader<D> loader, D data) {
         Exception exception = null;
-
+        if (loader instanceof AbstractModelLoader) {
+            exception = ((AbstractModelLoader) loader).getException();
+        }
         onLoadFinished(loader, data, exception);
         UIReactOnException(exception, data);
     }
