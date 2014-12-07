@@ -67,14 +67,10 @@ public class BaseListFragment extends BaseFragment{
 
         FrameLayout root = new FrameLayout(context);
 
-        // ------------------------------------------------------------------
-
         LinearLayout pframe = createProgressContainer(context);
         pframe.setId(INTERNAL_PROGRESS_CONTAINER_ID);
         root.addView(pframe, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-        // ------------------------------------------------------------------
 
         FrameLayout lframe = new FrameLayout(context);
         lframe.setId(INTERNAL_LIST_CONTAINER_ID);
@@ -89,8 +85,6 @@ public class BaseListFragment extends BaseFragment{
 
         root.addView(lframe, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-        // ------------------------------------------------------------------
 
         root.setLayoutParams(new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));

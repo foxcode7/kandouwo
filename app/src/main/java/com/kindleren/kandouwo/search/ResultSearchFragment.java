@@ -1,5 +1,6 @@
 package com.kindleren.kandouwo.search;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,8 +14,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,6 @@ import com.kandouwo.model.datarequest.search.SearchHotwordRequest;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
 import com.kindleren.kandouwo.base.RequestLoader;
-import com.kindleren.kandouwo.base.widget.HorizontalListView;
 import com.kindleren.kandouwo.common.config.BaseConfig;
 import com.kindleren.kandouwo.common.views.EditTextWithClearButton;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -44,9 +42,9 @@ import roboguice.inject.InjectView;
 import roboguice.util.Strings;
 
 /**
- * Created by foxcoder on 14-9-22.
+ * Created by xuezhangbin on 14/12/7.
  */
-public class SearchFragment extends BaseFragment implements AbsListView.OnScrollListener {
+public class ResultSearchFragment extends BaseFragment implements AbsListView.OnScrollListener {
     @Inject
     private LayoutInflater inflater;
 
@@ -64,35 +62,13 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
     @InjectView(R.id.history)
     private ListView historyListView;
 
-    private HorizontalListView hotBookHorizontalListView;
-
-    private HotBookData[] hotBookDatas;
-
     private List<HotWord> listHotWord;
 
     private EditTextWithClearButton mSearchView;
 
     private List<String> mHistoryWords = new ArrayList<String>();
 
-
-    //------------------------------ 假数据 -------------------------------
-    private void initHotBookData() {
-        hotBookDatas = new HotBookData[]{
-                new HotBookData(R.drawable.book_one_small, ""),
-                new HotBookData(R.drawable.book_two_small, ""),
-                new HotBookData(R.drawable.book_three_small, ""),
-                new HotBookData(R.drawable.book_one_small, ""),
-                new HotBookData(R.drawable.book_two_small, ""),
-                new HotBookData(R.drawable.book_three_small, ""),
-        };
-    }
-    //--------------------------------------------------------------------
-
-    private void setupHotBookList() {
-        initHotBookData();
-        HotBookAdapter adapter = new HotBookAdapter(getActivity(), hotBookDatas);
-        hotBookHorizontalListView.setAdapter(adapter);
-    }
+    public SearchTextListener callBack;
 
     @Override
     public void onStart() {
@@ -108,7 +84,7 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.result_frament_search, container, false);
     }
 
     @Override
@@ -120,21 +96,9 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         View view = getActionBar().getCustomView();
-        mSearchView = (EditTextWithClearButton) view.findViewById(R.id.search_edit);
-
-        mSearchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-                intent.putExtra(SearchResultActivity.FRAGMENT_CHOOSE, "search");
-                startActivity(intent);
-            }
-        });
+        mSearchView = (EditTextWithClearButton)view.findViewById(R.id.search_edit);
 
         mSettingPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-        hotBookHorizontalListView = (HorizontalListView) getView().findViewById(R.id.free_book_list_view);
-        setupHotBookList();
 
         viewPager = (ViewPager) getView().findViewById(R.id.pager);
         viewPager.post(new Runnable() {
@@ -150,19 +114,18 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-        item.setVisible(true);
-    }
-
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_search) {
+        if(item.getItemId() == R.id.action_search)
+        {
             search();
         }
         return true;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        callBack = (SearchTextListener)getActivity();
     }
 
     @Override
@@ -187,20 +150,21 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
             add2SearchHistory(query);
         }
 
-        Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-        intent.putExtra(SearchResultActivity.SEARCH_KEY, query);
-        startActivity(intent);
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+        mSearchView.clearFocus();
+        //切换fragment到搜索结果页
+        callBack.setSearchText(query);
     }
 
     private View historyFooter;
-
     private void add2SearchHistory(String searchKey) {
         if (TextUtils.isEmpty(searchKey)) {
             return;
         }
         searchKey = searchKey.replaceAll("\\s", "");
 
-        if (searchKey != null && !mHistoryWords.isEmpty() && mHistoryWords.contains(searchKey)) {
+        if (searchKey != null && !mHistoryWords.isEmpty() &&mHistoryWords.contains(searchKey)) {
             mHistoryWords.remove(searchKey);
         }
 
@@ -344,7 +308,6 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
         }
     };
 
-    //滑动时隐藏输入法
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -404,4 +367,10 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
             getView().findViewById(R.id.indicator_divider).setVisibility(View.GONE);
         }
     }
+
+
+    public interface SearchTextListener{
+        void setSearchText(String text);
+    }
+
 }
