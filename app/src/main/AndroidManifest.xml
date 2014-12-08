@@ -77,6 +77,14 @@
             android:launchMode="standard"
             android:screenOrientation="portrait" >
         </activity>
+
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+
+        <activity
+            android:name=".search.SearchResultActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/text_search_result"
+             />
     </application>
 
 </manifest>

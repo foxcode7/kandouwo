@@ -1,5 +1,6 @@
 package com.kindleren.kandouwo.search;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,7 +30,6 @@ import com.kandouwo.model.datarequest.search.SearchHotwordRequest;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
 import com.kindleren.kandouwo.base.RequestLoader;
-import com.kindleren.kandouwo.base.widget.HorizontalListView;
 import com.kindleren.kandouwo.common.config.BaseConfig;
 import com.kindleren.kandouwo.common.views.EditTextWithClearButton;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -42,9 +42,9 @@ import roboguice.inject.InjectView;
 import roboguice.util.Strings;
 
 /**
- * Created by foxcoder on 14-9-22.
+ * Created by xuezhangbin on 14/12/7.
  */
-public class SearchFragment extends BaseFragment implements AbsListView.OnScrollListener {
+public class ResultSearchFragment extends BaseFragment implements AbsListView.OnScrollListener {
     @Inject
     private LayoutInflater inflater;
 
@@ -65,35 +65,13 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
     @InjectView(R.id.camera)
     private ImageView imageViewCamera;
 
-    private HorizontalListView hotBookHorizontalListView;
-
-    private HotBookData[] hotBookDatas;
-
     private List<HotWord> listHotWord;
 
     private EditTextWithClearButton mSearchView;
 
     private List<String> mHistoryWords = new ArrayList<String>();
 
-
-    //------------------------------ 假数据 -------------------------------
-    private void initHotBookData() {
-        hotBookDatas = new HotBookData[]{
-                new HotBookData(R.drawable.book_one_small, ""),
-                new HotBookData(R.drawable.book_two_small, ""),
-                new HotBookData(R.drawable.book_three_small, ""),
-                new HotBookData(R.drawable.book_one_small, ""),
-                new HotBookData(R.drawable.book_two_small, ""),
-                new HotBookData(R.drawable.book_three_small, ""),
-        };
-    }
-    //--------------------------------------------------------------------
-
-    private void setupHotBookList() {
-        initHotBookData();
-        HotBookAdapter adapter = new HotBookAdapter(getActivity(), hotBookDatas);
-        hotBookHorizontalListView.setAdapter(adapter);
-    }
+    public SearchTextListener callBack;
 
     @Override
     public void onStart() {
@@ -108,25 +86,35 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.result_frament_search, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mSearchView = (EditTextWithClearButton) getView().findViewById(R.id.search_edit);
-        mSearchView.setClearButton(R.drawable.ic_search_clear_in_dealmap);
-        mSearchView.removeDrawableEmpty();
 
-        //点击button跳转到搜索结果页的Activity的搜索fragment，该Activity还承载搜索结果页fragment，根据frament_choose标记跳的页面
-        mSearchView.setOnClickListener(new View.OnClickListener() {
+
+        imageViewCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-                intent.putExtra(SearchResultActivity.FRAGMENT_CHOOSE, "search");
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), MipcaActivityCapture.class);
                 startActivity(intent);
+                return;
             }
         });
+
+        mSearchView = (EditTextWithClearButton)getView().findViewById(R.id.search_edit);
+        ((EditTextWithClearButton) getView().findViewById(R.id.search_edit)).setClearButton(R.drawable.ic_search_clear_in_dealmap);
+        ((EditTextWithClearButton) getView().findViewById(R.id.search_edit)).removeDrawableEmpty();
+
+        getView().findViewById(R.id.search_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search();
+            }
+        });
+
     }
 
     @Override
@@ -134,9 +122,6 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
         super.onActivityCreated(savedInstanceState);
 
         mSettingPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-        hotBookHorizontalListView = (HorizontalListView) getView().findViewById(R.id.free_book_list_view);
-        setupHotBookList();
 
         viewPager = (ViewPager) getView().findViewById(R.id.pager);
         viewPager.post(new Runnable() {
@@ -149,18 +134,19 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
         //网络请求预留方法------------------------------
 //        getLoaderManager().initLoader(LOADER_ID_HOTWORD, null, hotWordLoader);
         //--------------------------------------------
-
-        imageViewCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), MipcaActivityCapture.class);
-                startActivity(intent);
-                return;
-            }
-        });
     }
 
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        callBack = (SearchTextListener)getActivity();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 
     private void search() {
         if (!TextUtils.isEmpty(mSearchView.getText())) {
@@ -179,20 +165,21 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
             add2SearchHistory(query);
         }
 
-        Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-        intent.putExtra(SearchResultActivity.SEARCH_KEY, query);
-        startActivity(intent);
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+        mSearchView.clearFocus();
+        //切换到搜索结果页fragment
+        callBack.setSearchText(query);
     }
 
     private View historyFooter;
-
     private void add2SearchHistory(String searchKey) {
         if (TextUtils.isEmpty(searchKey)) {
             return;
         }
         searchKey = searchKey.replaceAll("\\s", "");
 
-        if (searchKey != null && !mHistoryWords.isEmpty() && mHistoryWords.contains(searchKey)) {
+        if (searchKey != null && !mHistoryWords.isEmpty() &&mHistoryWords.contains(searchKey)) {
             mHistoryWords.remove(searchKey);
         }
 
@@ -336,7 +323,6 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
         }
     };
 
-    //滑动时隐藏输入法
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -396,4 +382,10 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
             getView().findViewById(R.id.indicator_divider).setVisibility(View.GONE);
         }
     }
+
+
+    public interface SearchTextListener{
+        void setSearchText(String text);
+    }
+
 }

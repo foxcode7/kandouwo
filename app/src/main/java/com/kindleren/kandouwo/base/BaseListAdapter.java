@@ -12,8 +12,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import roboguice.RoboGuice;
-
 /**
  * Adapter基类
  *
@@ -39,7 +37,7 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
         mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        RoboGuice.getInjector(context).injectMembersWithoutViews(this);
+//        RoboGuice.getInjector(context).injectMembersWithoutViews(this);
     }
 
     @Override
