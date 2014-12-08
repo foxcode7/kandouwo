@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">看豆窝</string>
-    <string name="main_home">主页</string>
+    <string name="main_home">书架</string>
     <string name="main_hot">书城</string>
     <string name="main_search">搜索</string>
     <string name="main_user">我的</string>

@@ -1,6 +1,5 @@
 package com.kindleren.kandouwo.hot;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,22 +19,17 @@ import java.util.List;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import roboguice.inject.InjectView;
-import uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout;
-import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
-import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 
 /**
  * Created by foxcoder on 14-9-22.
  */
-public class HotFragment extends BaseFragment implements
-        OnRefreshListener, View.OnClickListener {
+public class HotFragment extends BaseFragment implements View.OnClickListener {
     @Inject
     private LayoutInflater inflater;
 
     @InjectView(R.id.ad_indicator)
     private CirclePageIndicator adPageIndicator;
 
-    private PullToRefreshLayout mPullToRefreshLayout;
     private AutoScrollViewPager viewPager;
     private List<Integer> imageIdList;
     private ImageView closeAdsBtn;
@@ -71,18 +65,6 @@ public class HotFragment extends BaseFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        // Now find the PullToRefreshLayout to setup
-        mPullToRefreshLayout = (PullToRefreshLayout) getView().findViewById(R.id.ptr_layout);
-
-        // Now setup the PullToRefreshLayout
-        ActionBarPullToRefresh.from(getActivity())
-                // Mark All Children as pullable
-                .allChildrenArePullable()
-                        // Set a OnRefreshListener
-                .listener(this)
-                        // Finally commit the setup to our PullToRefreshLayout
-                .setup(mPullToRefreshLayout);
 
         viewPager = (AutoScrollViewPager) getView().findViewById(R.id.ad_view);
 
@@ -123,36 +105,6 @@ public class HotFragment extends BaseFragment implements
         }else {
             adPageIndicator.setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    public void onRefreshStarted(View view) {
-        // Hide the list
-        // setListShown(false);
-
-        /**
-         * Simulate Refresh with 4 seconds sleep
-         */
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-                super.onPostExecute(result);
-
-                // Notify PullToRefreshLayout that the refresh has finished
-                mPullToRefreshLayout.setRefreshComplete();
-            }
-        }.execute();
     }
 
     @Override
