@@ -54,12 +54,14 @@ public class SearchResultAdapter extends SelectableListAdapter<DoubanBookInfo> {
             holder.authorName = (TextView) convertView.findViewById(R.id.book_author);
             holder.book_content_type = (TextView) convertView.findViewById(R.id.book_content_type);
             holder.bookName = (TextView) convertView.findViewById(R.id.book_name);
+
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
 
         holder.bookName.setText(getItem(position).getTitle().toString());
+        holder.authorName.setText(getItem(position).getAuthor().get(0).toString());
         picasso.with(context).load(getItem(position).getImages().getMedium()).into(holder.bookImage);
         return convertView;
     }
