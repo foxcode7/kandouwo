@@ -17,11 +17,6 @@ public class DoubanBookInfo {
     private String alt;
     private String image;
     private Images images;
-
-    public List<String> getAuthor() {
-        return author;
-    }
-
     private List<String> author;
     private List<String> translator;
     private String publisher;
@@ -35,22 +30,10 @@ public class DoubanBookInfo {
     private String summary;
     private String catalog;
     private String ebook_url; //豆瓣阅读，该字段只在存在对应电子书时提供
-
-
-
     private String ebook_price;
 
     public Images getImages() {
         return images;
-    }
-
-    public String getEbook_price() {
-        return ebook_price;
-    }
-
-
-    public String getTitle() {
-        return title;
     }
 
     public class Images {

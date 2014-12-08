@@ -1,6 +1,5 @@
 package com.kindleren.kandouwo.search;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +46,7 @@ public class HotWordsFragment extends BaseFragment {
                 if (i < hotWords.size()) {
                     hotWord = hotWords.get(i);
                 }
-                final TextView textView = (TextView) inflater.inflate(R.layout.hot_search_word, null);
+                TextView textView = (TextView) inflater.inflate(R.layout.hot_search_word, null);
                 int spcae = hotWord == null ? 1 : HotWordsController.getSpace(hotWord.name);
                 count += spcae;
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, spcae);
@@ -59,10 +58,7 @@ public class HotWordsFragment extends BaseFragment {
                         textView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-                                intent.putExtra(SearchResultActivity.SEARCH_KEY, textView.getText().toString());
-                                intent.putExtra(SearchResultActivity.FRAGMENT_CHOOSE,"result");
-                                startActivity(intent);
+
                             }
                         });
                     } else {
@@ -136,9 +132,5 @@ public class HotWordsFragment extends BaseFragment {
         dividerParams.topMargin = BaseConfig.dp2px(-1);
         divider.setBackgroundResource(R.color.gray_light);
         linearLayout.addView(divider,dividerParams);
-    }
-
-    public interface OnHotWordClickListener {
-        public void onHotWordClick(String hotword);
     }
 }

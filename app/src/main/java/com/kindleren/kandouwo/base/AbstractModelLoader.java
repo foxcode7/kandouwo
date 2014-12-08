@@ -3,7 +3,14 @@ package com.kindleren.kandouwo.base;
 import android.content.Context;
 import android.support.v4.content.ConcurrentTaskLoader;
 
+import com.google.inject.name.Named;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+
 import java.io.IOException;
+import java.net.URI;
 
 /**
  * Created by foxcoder on 14-9-18.
@@ -15,6 +22,7 @@ public abstract class AbstractModelLoader<D> extends ConcurrentTaskLoader<D> {
     public AbstractModelLoader(Context context) {
         super(context);
     }
+
 
     @Override
     public D loadInBackground() {

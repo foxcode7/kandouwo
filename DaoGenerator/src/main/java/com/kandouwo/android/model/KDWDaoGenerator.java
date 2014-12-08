@@ -11,15 +11,14 @@ import de.greenrobot.daogenerator.Schema;
 public class KDWDaoGenerator {
     private static final int DB_VERSION = 1;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception{
         Schema schema = new Schema(DB_VERSION, "com.kandouwo.model.dao");
         schema.enableKeepSectionsByDefault();
         createSplashImage(schema);
-        createSearchResultBook(schema);
         new DaoGenerator().generateAll(schema, "../model/src/main/java");
     }
 
-    private static void createSplashImage(Schema schema) {
+    private static void createSplashImage(Schema schema){
         Entity splashImage = schema.addEntity("SplashImage");
         splashImage.setTableName("splash_image");
         splashImage.addLongProperty("id").primaryKey();
@@ -28,15 +27,5 @@ public class KDWDaoGenerator {
         splashImage.addLongProperty("endTime");
         splashImage.addStringProperty("imageUrl");
         splashImage.addStringProperty("title");
-    }
-
-    private static void createSearchResultBook(Schema schema) {
-        Entity searchResult = schema.addEntity("SearchResult");
-        searchResult.setTableName("search_result");
-        searchResult.addLongProperty("id").primaryKey();
-        searchResult.addStringProperty("bookName");
-        searchResult.addIntProperty("bookPage");
-        searchResult.addLongProperty("price");
-        searchResult.addLongProperty("author");
     }
 }

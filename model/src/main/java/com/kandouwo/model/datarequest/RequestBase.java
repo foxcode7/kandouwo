@@ -120,7 +120,7 @@ public abstract class RequestBase<T> implements Request<T> {
                 JsonElement error = root.get("error");
                 convertErrorElement(error);
             }
-            throw new IOException("Fail to get books");
+            throw new IOException("Fail to get data");
         }
     }
 
@@ -136,7 +136,7 @@ public abstract class RequestBase<T> implements Request<T> {
     }
 
     protected String dataElementName() {
-        return "books";
+        return "data";
     }
 
 

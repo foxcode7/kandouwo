@@ -1,5 +1,9 @@
 package com.kindleren.kandouwo.hot;
 
+<<<<<<< HEAD
+=======
+import android.os.AsyncTask;
+>>>>>>> Revert d4cd5b8..4a13dad
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,17 +23,32 @@ import java.util.List;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import roboguice.inject.InjectView;
+<<<<<<< HEAD
+=======
+import uk.co.senab.actionbarpulltorefresh.extras.actionbarcompat.PullToRefreshLayout;
+import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
+import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
+>>>>>>> Revert d4cd5b8..4a13dad
 
 /**
  * Created by foxcoder on 14-9-22.
  */
+<<<<<<< HEAD
 public class HotFragment extends BaseFragment implements View.OnClickListener {
+=======
+public class HotFragment extends BaseFragment implements
+        OnRefreshListener, View.OnClickListener {
+>>>>>>> Revert d4cd5b8..4a13dad
     @Inject
     private LayoutInflater inflater;
 
     @InjectView(R.id.ad_indicator)
     private CirclePageIndicator adPageIndicator;
 
+<<<<<<< HEAD
+=======
+    private PullToRefreshLayout mPullToRefreshLayout;
+>>>>>>> Revert d4cd5b8..4a13dad
     private AutoScrollViewPager viewPager;
     private List<Integer> imageIdList;
     private ImageView closeAdsBtn;
@@ -66,6 +85,21 @@ public class HotFragment extends BaseFragment implements View.OnClickListener {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+<<<<<<< HEAD
+=======
+        // Now find the PullToRefreshLayout to setup
+        mPullToRefreshLayout = (PullToRefreshLayout) getView().findViewById(R.id.ptr_layout);
+
+        // Now setup the PullToRefreshLayout
+        ActionBarPullToRefresh.from(getActivity())
+                // Mark All Children as pullable
+                .allChildrenArePullable()
+                        // Set a OnRefreshListener
+                .listener(this)
+                        // Finally commit the setup to our PullToRefreshLayout
+                .setup(mPullToRefreshLayout);
+
+>>>>>>> Revert d4cd5b8..4a13dad
         viewPager = (AutoScrollViewPager) getView().findViewById(R.id.ad_view);
 
         //------------------------假数据-------------------------
@@ -99,8 +133,12 @@ public class HotFragment extends BaseFragment implements View.OnClickListener {
             adPageIndicator.setViewPager(viewPager);
             adPageIndicator.setFillColor(getResources().getColor(R.color.blue));
             adPageIndicator.setPageColor(getResources().getColor(R.color.gray_light));
+<<<<<<< HEAD
             adPageIndicator.setStrokeWidth(0);
             adPageIndicator.setRadius(BaseConfig.dp2px(3));
+=======
+            adPageIndicator.setRadius(BaseConfig.dp2px(4));
+>>>>>>> Revert d4cd5b8..4a13dad
             adPageIndicator.setVisibility(View.VISIBLE);
         }else {
             adPageIndicator.setVisibility(View.GONE);
@@ -108,6 +146,39 @@ public class HotFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public void onRefreshStarted(View view) {
+        // Hide the list
+        // setListShown(false);
+
+        /**
+         * Simulate Refresh with 4 seconds sleep
+         */
+        new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                super.onPostExecute(result);
+
+                // Notify PullToRefreshLayout that the refresh has finished
+                mPullToRefreshLayout.setRefreshComplete();
+            }
+        }.execute();
+    }
+
+    @Override
+>>>>>>> Revert d4cd5b8..4a13dad
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.close_ads:

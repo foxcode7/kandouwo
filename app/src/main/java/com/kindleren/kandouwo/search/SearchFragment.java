@@ -1,9 +1,6 @@
 package com.kindleren.kandouwo.search;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -18,9 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -46,7 +41,7 @@ import roboguice.util.Strings;
 /**
  * Created by foxcoder on 14-9-22.
  */
-public class SearchFragment extends BaseFragment implements AbsListView.OnScrollListener {
+public class SearchFragment extends BaseFragment {
     @Inject
     private LayoutInflater inflater;
 
@@ -73,6 +68,7 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
     private EditTextWithClearButton mSearchView;
 
     private List<String> mHistoryWords = new ArrayList<String>();
+
 
 
     //------------------------------ 假数据 -------------------------------
@@ -119,19 +115,6 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        View view = getActionBar().getCustomView();
-        Drawable dr = this.getResources().getDrawable(R.drawable.bg_listitem); //背景色木有，先随便放个
-        getActionBar().setBackgroundDrawable(dr);
-        mSearchView = (EditTextWithClearButton) view.findViewById(R.id.search_edit);
-
-        mSearchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-                intent.putExtra(SearchResultActivity.FRAGMENT_CHOOSE, "search");
-                startActivity(intent);
-            }
-        });
 
         mSettingPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
@@ -176,21 +159,24 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
         if (add2history) {
             add2SearchHistory(query);
         }
-
-        Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-        intent.putExtra(SearchResultActivity.SEARCH_KEY, query);
-        startActivity(intent);
+//
+//        Intent intent = new Intent(getActivity(), SearchResultActivity.class);
+//        intent.putExtra(SearchResultActivity.SEARCH_KEY, query);
+//        intent.putExtra(SearchResultActivity.SEARCH_FROM, searchType);
+//        intent.putExtra(SearchResultActivity.SEARCH_SOURCE, source);
+//        intent.putExtra(SearchResultActivity.SEARCH_CATE, getArguments().getLong(SearchResultActivity.SEARCH_CATE, -1));
+//
+//        startActivity(intent);
     }
 
     private View historyFooter;
-
     private void add2SearchHistory(String searchKey) {
         if (TextUtils.isEmpty(searchKey)) {
             return;
         }
         searchKey = searchKey.replaceAll("\\s", "");
 
-        if (searchKey != null && !mHistoryWords.isEmpty() && mHistoryWords.contains(searchKey)) {
+        if (searchKey != null && !mHistoryWords.isEmpty() &&mHistoryWords.contains(searchKey)) {
             mHistoryWords.remove(searchKey);
         }
 
@@ -240,17 +226,6 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
             });
             historyListView.setAdapter(historyAdapter);
             setListViewHeightBasedOnChildren(historyListView);
-            historyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String text = parent.getItemAtPosition(position).toString();
-
-                    Intent intent = new Intent(getActivity(), SearchResultActivity.class);
-                    intent.putExtra(SearchResultActivity.SEARCH_KEY, text);
-                    intent.putExtra(SearchResultActivity.FRAGMENT_CHOOSE,"result");
-                    startActivity(intent);
-                }
-            });
         }
     }
 
@@ -333,19 +308,6 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
 
         }
     };
-
-    //滑动时隐藏输入法
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
-        mSearchView.clearFocus();
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-    }
 
     private class HotWordAdapter extends FragmentPagerAdapter {
         private List<HotWord> hotWords;
