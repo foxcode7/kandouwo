@@ -61,7 +61,10 @@ public class SearchResultAdapter extends SelectableListAdapter<DoubanBookInfo> {
         }
 
         holder.bookName.setText(getItem(position).getTitle().toString());
-        holder.authorName.setText(getItem(position).getAuthor().get(0).toString());
+
+        //可能会存在作者为空，超出边界
+        //holder.authorName.setText(getItem(position).getAuthor().get(0).toString());
+
         picasso.with(context).load(getItem(position).getImages().getMedium()).into(holder.bookImage);
         return convertView;
     }

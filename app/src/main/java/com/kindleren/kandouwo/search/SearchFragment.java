@@ -3,7 +3,6 @@ package com.kindleren.kandouwo.search;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -14,13 +13,12 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -64,6 +62,9 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
     @InjectView(R.id.history)
     private ListView historyListView;
 
+    @InjectView(R.id.camera)
+    private ImageView imageViewCamera;
+
     private HorizontalListView hotBookHorizontalListView;
 
     private HotBookData[] hotBookDatas;
@@ -103,7 +104,6 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -114,16 +114,11 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    }
+        mSearchView = (EditTextWithClearButton) getView().findViewById(R.id.search_edit);
+        mSearchView.setClearButton(R.drawable.ic_search_clear_in_dealmap);
+        mSearchView.removeDrawableEmpty();
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        View view = getActionBar().getCustomView();
-        Drawable dr = this.getResources().getDrawable(R.drawable.bg_listitem); //背景色木有，先随便放个
-        getActionBar().setBackgroundDrawable(dr);
-        mSearchView = (EditTextWithClearButton) view.findViewById(R.id.search_edit);
-
+        //点击button跳转到搜索结果页的Activity的搜索fragment，该Activity还承载搜索结果页fragment，根据frament_choose标记跳的页面
         mSearchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +127,11 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         mSettingPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
@@ -149,15 +149,17 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
         //网络请求预留方法------------------------------
 //        getLoaderManager().initLoader(LOADER_ID_HOTWORD, null, hotWordLoader);
         //--------------------------------------------
-    }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.menu_search, menu);
-//        MenuItem item = menu.findItem(R.id.action_search);
-//        item.setVisible(true);
+        imageViewCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), MipcaActivityCapture.class);
+                startActivity(intent);
+                return;
+            }
+        });
     }
-
 
 
     private void search() {

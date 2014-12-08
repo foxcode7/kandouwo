@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="@dimen/actionbar_height">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_hotel_search_edit"
+        android:id="@+id/header"
+        android:layout_gravity="top"
+        android:layout_height="46dp">
+
+        <ImageView
+            android:id="@+id/camera"
+            android:src="@drawable/barcode_scan"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+
+        <com.kindleren.kandouwo.common.views.EditTextWithClearButton
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/search_edit"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:paddingLeft="10dp"
+            android:hint="请输入搜索关键字"
+            android:layout_marginLeft="5dp"
+            android:singleLine="true"
+            android:layout_marginRight="5dp"
+            android:textColorHint="@color/border_gray"
+            android:focusable="true"
+            android:background="@drawable/bg_search_edit_background"
+            android:drawableLeft="@drawable/ic_search" />
+
+        <ImageView
+            android:id="@+id/search_image"
+            android:src="@drawable/tab_search_selector"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:clickable="true"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+    </LinearLayout>
+
+</LinearLayout>

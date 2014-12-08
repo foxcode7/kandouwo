@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -15,12 +14,12 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -63,6 +62,9 @@ public class ResultSearchFragment extends BaseFragment implements AbsListView.On
     @InjectView(R.id.history)
     private ListView historyListView;
 
+    @InjectView(R.id.camera)
+    private ImageView imageViewCamera;
+
     private List<HotWord> listHotWord;
 
     private EditTextWithClearButton mSearchView;
@@ -80,7 +82,6 @@ public class ResultSearchFragment extends BaseFragment implements AbsListView.On
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -91,15 +92,34 @@ public class ResultSearchFragment extends BaseFragment implements AbsListView.On
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        imageViewCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), MipcaActivityCapture.class);
+                startActivity(intent);
+                return;
+            }
+        });
+
+        mSearchView = (EditTextWithClearButton)getView().findViewById(R.id.search_edit);
+        ((EditTextWithClearButton) getView().findViewById(R.id.search_edit)).setClearButton(R.drawable.ic_search_clear_in_dealmap);
+        ((EditTextWithClearButton) getView().findViewById(R.id.search_edit)).removeDrawableEmpty();
+
+        getView().findViewById(R.id.search_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search();
+            }
+        });
+
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        View view = getActionBar().getCustomView();
-        Drawable dr = this.getResources().getDrawable(R.drawable.bg_listitem); //背景色木有，先随便放个
-        getActionBar().setBackgroundDrawable(dr);
-        mSearchView = (EditTextWithClearButton)view.findViewById(R.id.search_edit);
 
         mSettingPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
@@ -116,14 +136,6 @@ public class ResultSearchFragment extends BaseFragment implements AbsListView.On
         //--------------------------------------------
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_search)
-        {
-            search();
-        }
-        return true;
-    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -156,7 +168,7 @@ public class ResultSearchFragment extends BaseFragment implements AbsListView.On
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
         mSearchView.clearFocus();
-        //切换fragment到搜索结果页
+        //切换到搜索结果页fragment
         callBack.setSearchText(query);
     }
 

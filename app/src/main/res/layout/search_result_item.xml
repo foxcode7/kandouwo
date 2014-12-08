@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_toRightOf="@id/book_image"
-                android:text="薛章斌/杨鑫著"
+                android:text="薛章斌/杨鑫"
                 android:textColor="@color/black_another"
                 android:textSize="@dimen/text_size_h9" />
 
