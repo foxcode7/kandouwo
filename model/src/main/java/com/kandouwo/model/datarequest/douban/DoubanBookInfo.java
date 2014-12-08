@@ -17,6 +17,11 @@ public class DoubanBookInfo {
     private String alt;
     private String image;
     private Images images;
+
+    public List<String> getAuthor() {
+        return author;
+    }
+
     private List<String> author;
     private List<String> translator;
     private String publisher;

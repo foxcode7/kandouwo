@@ -3,6 +3,7 @@ package com.kindleren.kandouwo.search;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -120,6 +121,8 @@ public class SearchFragment extends BaseFragment implements AbsListView.OnScroll
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         View view = getActionBar().getCustomView();
+        Drawable dr = this.getResources().getDrawable(R.drawable.bg_listitem); //背景色木有，先随便放个
+        getActionBar().setBackgroundDrawable(dr);
         mSearchView = (EditTextWithClearButton) view.findViewById(R.id.search_edit);
 
         mSearchView.setOnClickListener(new View.OnClickListener() {

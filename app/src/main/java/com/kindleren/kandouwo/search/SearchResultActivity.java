@@ -1,5 +1,6 @@
 package com.kindleren.kandouwo.search;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -34,6 +35,9 @@ public class SearchResultActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result_activity);
+
+        Drawable dr = this.getResources().getDrawable(R.drawable.bg_listitem); //背景色木有，先随便放个
+        getSupportActionBar().setBackgroundDrawable(dr);
 
         customeView = getLayoutInflater().inflate(R.layout.search_box_layout, null);
         customeView.findViewById(R.id.search_edit).setOnClickListener(this);
