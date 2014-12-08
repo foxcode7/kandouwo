@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    >
+    <com.actionbarsherlock.internal.widget.IcsLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/listitem_background"
+        android:divider="@drawable/gray_horizontal_separator"
+        android:orientation="vertical"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:showDividers="middle">
+
+        <RelativeLayout
+            android:id="@+id/poi_layout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/list_row_selector"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/book_image"
+                android:layout_width="70dp"
+                android:layout_height="97dp"
+                android:layout_marginRight="8dp"
+                android:scaleType="fitXY"
+                android:src="@color/green" />
+
+            <TextView
+                android:id="@+id/book_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/book_image"
+                android:drawablePadding="8dp"
+                android:singleLine="true"
+                android:text="红高粱"
+                android:textColor="@color/black1"
+                android:textSize="@dimen/text_size_h5" />
+
+            <RatingBar
+                android:id="@+id/rating"
+                style="?android:ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/book_name"
+                android:layout_toRightOf="@id/book_image"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:paddingTop="4dp"
+                android:rating="5"
+                android:stepSize="0.1" />
+
+            <TextView
+                android:id="@+id/rating_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/rating"
+                android:layout_toRightOf="@id/rating"
+                android:paddingLeft="10dp"
+                android:text="5分"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/text_size_h9" />
+
+            <TextView
+                android:id="@+id/mark_numbers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/rating_text"
+                android:layout_toRightOf="@id/rating_text"
+                android:visibility="visible"
+                android:paddingLeft="10dp"
+                android:text="1024人评价"
+                android:textColor="@color/black_another"
+                android:textSize="@dimen/text_size_h9" />
+
+            <TextView
+                android:id="@+id/book_type_pdf"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rating"
+                android:layout_toRightOf="@id/book_image"
+                android:text="PDF"
+                android:background="@color/orange"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_h9" />
+
+            <TextView
+                android:id="@+id/book_type_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_alignBottom="@id/book_type_pdf"
+                android:layout_toRightOf="@id/book_type_pdf"
+                android:text="txt"
+                android:textColor="@color/white"
+                android:background="@color/green"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/text_size_h9" />
+
+            <TextView
+                android:id="@+id/book_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/book_image"
+                android:text="薛章斌/杨鑫著"
+                android:textColor="@color/black_another"
+                android:textSize="@dimen/text_size_h9" />
+
+            <TextView
+                android:id="@+id/book_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/book_author"
+                android:text="著"
+                android:textColor="@color/black_another"
+                android:textSize="@dimen/text_size_h9"/>
+
+            <TextView
+                android:id="@+id/book_content_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/book_author"
+                android:layout_alignParentRight="true"
+                android:text="言情/小说"
+                android:textColor="@color/black_another"
+                android:textSize="@dimen/text_size_h9" />
+
+
+        </RelativeLayout>
+
+
+    </com.actionbarsherlock.internal.widget.IcsLinearLayout>
+</FrameLayout>

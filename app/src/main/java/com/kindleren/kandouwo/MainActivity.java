@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 fragment = new HomeFragment();
                 break;
             case 1:
-                fragment = new HotFragment();
+                fragment = new HomeFragment();
                 break;
             case 2:
                 fragment = new SearchFragment();

@@ -44,6 +44,12 @@
 
     <!-- 搜索页 -->
     <string name="text_search">搜索</string>
+    <string name="text_search_result">搜索结果</string>
+    <string name="fetch_data_failed">数据获取失败</string>
+    <string name="check_network_then_click_for_retry">请检查网络后点击重新加载</string>
+    <string name="empty_info">暂无此信息</string>
+    <string name="loading">加载中</string>
+    <string name="page_footer_failed">数据获取失败，点击重试</string>
 
     <!-- 热词 -->
     <string-array name="search_hot_word">
@@ -67,8 +73,6 @@
     <string name="flash_open">闪光灯已开启</string>
     <string name="flash_close">闪光灯已关闭</string>
     <string name="title_activity_search_result">SearchResultActivity</string>
-    <string name="title_activity_search__result_">Search_Result_Activity</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- 设置页面 -->
     <string name="screen_light">屏幕亮度</string>
