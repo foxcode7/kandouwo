@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp"
-    >
+    android:padding="16dp">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_wifi"/>
+        android:background="@drawable/bg_wifi" />
 
     <TextView
         android:id="@+id/message"
@@ -19,8 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="@string/fetch_data_failed"
-        />
+        android:text="@string/fetch_data_failed" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,7 +28,6 @@
         android:layout_marginTop="10dp"
         android:textColor="#9a9a9a"
         android:textSize="12sp"
-        android:text="@string/check_network_then_click_for_retry"
-        />
+        android:text="@string/check_network_then_click_for_retry" />
 
 </LinearLayout>

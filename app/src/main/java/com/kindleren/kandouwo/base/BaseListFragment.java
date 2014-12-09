@@ -20,7 +20,7 @@ import com.kindleren.kandouwo.R;
 /**
  * Created by xuezhangbin on 14/12/1.
  */
-public class BaseListFragment extends BaseFragment{
+public class BaseListFragment extends BaseFragment {
     static final int INTERNAL_PROGRESS_CONTAINER_ID = 0x00ff0002;
     static final int INTERNAL_LIST_CONTAINER_ID = 0x00ff0003;
     static final int INTERNAL_DEFAULT_EMPTY_ID = 0x00ff0004;
