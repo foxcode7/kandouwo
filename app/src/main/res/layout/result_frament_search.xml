@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/actionbar_search"/>
+        //恢复使用actionbar，将搜索内容重新放入actionbar中
+        <!--<include layout="@layout/actionbar_search"/>-->
 
         <FrameLayout
             android:layout_width="match_parent"

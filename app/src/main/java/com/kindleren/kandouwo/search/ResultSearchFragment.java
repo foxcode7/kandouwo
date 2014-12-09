@@ -62,7 +62,6 @@ public class ResultSearchFragment extends BaseFragment implements AbsListView.On
     @InjectView(R.id.history)
     private ListView historyListView;
 
-    @InjectView(R.id.camera)
     private ImageView imageViewCamera;
 
     private List<HotWord> listHotWord;
@@ -94,6 +93,15 @@ public class ResultSearchFragment extends BaseFragment implements AbsListView.On
         super.onViewCreated(view, savedInstanceState);
 
 
+
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        View actionView = getActionBar().getCustomView();
+        imageViewCamera = (ImageView)actionView.findViewById(R.id.camera);
         imageViewCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,22 +112,16 @@ public class ResultSearchFragment extends BaseFragment implements AbsListView.On
             }
         });
 
-        mSearchView = (EditTextWithClearButton)getView().findViewById(R.id.search_edit);
-        ((EditTextWithClearButton) getView().findViewById(R.id.search_edit)).setClearButton(R.drawable.ic_search_clear_in_dealmap);
-        ((EditTextWithClearButton) getView().findViewById(R.id.search_edit)).removeDrawableEmpty();
+        mSearchView = (EditTextWithClearButton)actionView.findViewById(R.id.search_edit);
+        ((EditTextWithClearButton) actionView.findViewById(R.id.search_edit)).setClearButton(R.drawable.ic_search_clear_in_dealmap);
+        ((EditTextWithClearButton) actionView.findViewById(R.id.search_edit)).removeDrawableEmpty();
 
-        getView().findViewById(R.id.search_image).setOnClickListener(new View.OnClickListener() {
+        actionView.findViewById(R.id.search_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 search();
             }
         });
-
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
         mSettingPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 

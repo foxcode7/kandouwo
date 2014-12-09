@@ -20,11 +20,11 @@ public class SearchResultAdapter extends SelectableListAdapter<DoubanBookInfo> {
     private Context context;
 
     public SearchResultAdapter(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
-    public SearchResultAdapter(Context context,List<DoubanBookInfo> data) {
-        super(context,data);
+    public SearchResultAdapter(Context context, List<DoubanBookInfo> data) {
+        super(context, data);
         this.context = context;
     }
 
@@ -52,7 +52,7 @@ public class SearchResultAdapter extends SelectableListAdapter<DoubanBookInfo> {
             holder = new Holder();
             holder.bookImage = (ImageView) convertView.findViewById(R.id.book_image);
             holder.authorName = (TextView) convertView.findViewById(R.id.book_author);
-            holder.book_content_type = (TextView) convertView.findViewById(R.id.book_content_type);
+            holder.book_publisher = (TextView) convertView.findViewById(R.id.book_publisher);
             holder.bookName = (TextView) convertView.findViewById(R.id.book_name);
 
             convertView.setTag(holder);
@@ -61,9 +61,18 @@ public class SearchResultAdapter extends SelectableListAdapter<DoubanBookInfo> {
         }
 
         holder.bookName.setText(getItem(position).getTitle().toString());
+        String publisher = getItem(position).getPublisher().toString();
 
-        //可能会存在作者为空，超出边界
-        //holder.authorName.setText(getItem(position).getAuthor().get(0).toString());
+        if (publisher.isEmpty()) {
+            holder.book_publisher.setText(R.string.empty_publisher);
+        } else {
+            holder.book_publisher.setText(getItem(position).getPublisher().toString());
+        }
+        List<String> authorName = getItem(position).getAuthor();
+        if (!authorName.isEmpty() && authorName != null) {
+            //可能会存在作者为空，超出边界
+            holder.authorName.setText(getItem(position).getAuthor().get(0).toString());
+        }
 
         picasso.with(context).load(getItem(position).getImages().getMedium()).into(holder.bookImage);
         return convertView;
@@ -73,6 +82,6 @@ public class SearchResultAdapter extends SelectableListAdapter<DoubanBookInfo> {
         public ImageView bookImage;
         public TextView bookName;
         public TextView authorName;
-        public TextView book_content_type;
+        public TextView book_publisher;
     }
 }
