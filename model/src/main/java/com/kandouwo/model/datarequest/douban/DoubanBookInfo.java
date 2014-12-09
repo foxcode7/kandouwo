@@ -24,6 +24,11 @@ public class DoubanBookInfo {
 
     private List<String> author;
     private List<String> translator;
+
+    public String getPublisher() {
+        return publisher;
+    }
+
     private String publisher;
     private String pubdate;
     private Rating rating;

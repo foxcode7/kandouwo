@@ -50,6 +50,7 @@
     <string name="empty_info">暂无此信息</string>
     <string name="loading">加载中</string>
     <string name="page_footer_failed">数据获取失败，点击重试</string>
+    <string name="empty_publisher">暂无出版社信息</string>
 
     <!-- 热词 -->
     <string-array name="search_hot_word">

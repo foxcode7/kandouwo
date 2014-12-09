@@ -62,6 +62,8 @@ public class SearchResultActivity extends BaseActivity implements View.OnClickLi
             getSupportFragmentManager().beginTransaction().add(R.id.search_result_content, resultSearchFragment).commitAllowingStateLoss();
         } else if (fragmentType.equals(RESULT)) {
             mSearchText = args.getString(SEARCH_KEY);
+            ((EditTextWithClearButton) customeView.findViewById(R.id.search_edit)).setText(mSearchText);
+
             SearchResultFragment searchResultFragment = SearchResultFragment.newInstance(mSearchText);
             getSupportFragmentManager().beginTransaction().add(R.id.search_result_content, searchResultFragment).commitAllowingStateLoss();
         }

@@ -99,7 +99,7 @@
                 android:paddingRight="5dp"
                 android:layout_alignBottom="@id/book_type_pdf"
                 android:layout_toRightOf="@id/book_type_pdf"
-                android:text="txt"
+                android:text="TXT"
                 android:textColor="@color/white"
                 android:background="@color/green"
                 android:layout_marginLeft="10dp"
@@ -126,7 +126,7 @@
                 android:textSize="@dimen/text_size_h9"/>
 
             <TextView
-                android:id="@+id/book_content_type"
+                android:id="@+id/book_publisher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/book_author"
