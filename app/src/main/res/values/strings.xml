@@ -31,7 +31,7 @@
     <string name="text_vip_center">会员中心</string>
 
     <!-- 登录 -->
-    <string name="text_username">手机/邮箱/用户名</string>
+    <string name="text_username">邮箱</string>
     <string name="text_password">密码</string>
     <string name="text_register">免费注册</string>
     <string name="text_quick_login">无账号快捷登录</string>

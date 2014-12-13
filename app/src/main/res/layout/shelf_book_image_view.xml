@@ -8,16 +8,16 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
-        android:id="@+id/itemImage" >
+        android:id="@+id/book_image" >
     </ImageView>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_below="@+id/itemImage"
+        android:layout_below="@+id/book_image"
         android:layout_height="wrap_content"
         android:text="TextView01"
         android:layout_centerHorizontal="true"
-        android:id="@+id/itemText">
+        android:id="@+id/book_name">
     </TextView>
 
 </RelativeLayout>

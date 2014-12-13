@@ -5,23 +5,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.BaseFragment;
+import com.kindleren.kandouwo.widget.DragGridView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by foxcoder on 14-11-7.
  */
 public class MyShelfFragment extends BaseFragment {
-    private String texts[] = null;
-    private int images[] = null;
+    private List<HashMap<String, Object>> dataSourceList = new ArrayList<HashMap<String, Object>>();
 
     @Inject
     private LayoutInflater inflater;
@@ -34,45 +33,27 @@ public class MyShelfFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        images=new int[]{
-                R.drawable.book_one_big,R.drawable.book_one_big,
-                R.drawable.book_one_big,R.drawable.book_one_big,
-                R.drawable.book_one_big,R.drawable.book_one_big,
-                R.drawable.book_one_big,R.drawable.book_one_big,
-                R.drawable.book_one_big,R.drawable.book_one_big,
-                R.drawable.book_one_big,R.drawable.book_one_big,
-                R.drawable.book_one_big,R.drawable.book_one_big,
-                R.drawable.book_one_big,R.drawable.book_one_big,
-                R.drawable.book_one_big,R.drawable.book_one_big,
-                R.drawable.book_one_big,R.drawable.book_one_big,
-                R.drawable.book_one_big,R.drawable.book_one_big};
-        texts = new String[]{ "宫式布局1", "宫式布局2",
-                "宫式布局3", "宫式布局4",
-                "宫式布局5", "宫式布局6",
-                "宫式布局7", "宫式布局8",
-                "宫式布局9", "宫式布局8",
-                "宫式布局11", "宫式布局8",
-                "宫式布局13", "宫式布局8",
-                "宫式布局15", "宫式布局8",
-                "宫式布局17", "宫式布局8",
-                "宫式布局19", "宫式布局8",
-                "宫式布局21", "宫式布局8"};
-        final GridView gridview = (GridView) getView().findViewById(R.id.gridview);
-        ArrayList<HashMap<String, Object>> lstImageItem = new ArrayList<HashMap<String, Object>>();
-        for (int i = 0; i < 22; i++) {
-            HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("itemImage", images[i]);
-            map.put("itemText", texts[i]);
-            lstImageItem.add(map);
+        if(getView() == null) {
+            return;
         }
 
-        SimpleAdapter saImageItems = new SimpleAdapter(getActivity(),
-                lstImageItem,// 数据源
-                R.layout.home_book_image_gridview,// 显示布局
-                new String[] { "itemImage", "itemText" },
-                new int[] { R.id.itemImage, R.id.itemText });
-        gridview.setAdapter(saImageItems);
-        gridview.setOnItemClickListener(new ItemClickListener());
+        final DragGridView dragGridView = (DragGridView) getView().findViewById(R.id.drag_girdview);
+
+        getMyShelfBookData();
+
+        final ShelfBookAdapter dragAdapter = new ShelfBookAdapter(getActivity(), dataSourceList);
+
+        dragGridView.setAdapter(dragAdapter);
+        dragGridView.setOnItemClickListener(new ItemClickListener());
+    }
+
+    private void getMyShelfBookData(){
+        for (int i = 0; i < 20; i++) {
+            HashMap<String, Object> itemHashMap = new HashMap<String, Object>();
+            itemHashMap.put("item_image",R.drawable.book_one_big);
+            itemHashMap.put("item_text", "宫式布局" + Integer.toString(i));
+            dataSourceList.add(itemHashMap);
+        }
     }
 
     class ItemClickListener implements AdapterView.OnItemClickListener {
