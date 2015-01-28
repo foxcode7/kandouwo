@@ -46,6 +46,11 @@ public class SearchBookResultRequest extends AbstractBookListRequest {
     }
 
     @Override
+    protected String dataElementName() {
+        return "books";
+    }
+
+    @Override
     public List<DoubanBookInfo> convert(JsonElement rootElement) throws IOException {
         JsonObject rootObject = rootElement.getAsJsonObject();
         int total = rootObject.has("total") ? rootObject.get("total")

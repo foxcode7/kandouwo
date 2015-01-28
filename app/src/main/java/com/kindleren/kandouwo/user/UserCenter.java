@@ -5,21 +5,18 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
 import com.kandouwo.model.GsonProvider;
 import com.kandouwo.model.SharedPreferencesUtils;
 import com.kandouwo.model.datarequest.login.User;
 import com.kindleren.kandouwo.login.LoginObservable;
 import com.kindleren.kandouwo.login.LoginObserver;
 
-import roboguice.util.Ln;
-
 /**
  * Created by foxcoder on 14-9-25.
  */
 public class UserCenter extends LoginObservable implements AccountProvider {
     private static final String KEY_USER_NAME = "username";
+    private static final String KEY_TOKEN = "token";
 
     private final SharedPreferences mPreferences;
     private final Gson mGson;
@@ -46,6 +43,18 @@ public class UserCenter extends LoginObservable implements AccountProvider {
     }
 
     /**
+     * @return 是否已登录
+     */
+    public boolean isLogin() {
+        return getUserId() > 0 && !TextUtils.isEmpty(getToken());
+    }
+
+    @Override
+    public String getToken() {
+        return mPreferences.getString(KEY_TOKEN, "");
+    }
+
+    /**
      * 退出看豆窝登录，其实就是清除本地缓存的用户信息
      */
     public void logout() {
@@ -55,7 +64,7 @@ public class UserCenter extends LoginObservable implements AccountProvider {
     }
 
     public void updateUserInfo(User user) {
-        setUserName(user.getUsername());
+        setUserName(user.getNickname());
     }
 
     public void setUserName(String userName) {

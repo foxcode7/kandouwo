@@ -31,12 +31,20 @@
     <string name="text_vip_center">会员中心</string>
 
     <!-- 登录 -->
+    <string name="text_register_btn">注册</string>
     <string name="text_username">邮箱</string>
     <string name="text_password">密码</string>
     <string name="text_register">免费注册</string>
-    <string name="text_quick_login">无账号快捷登录</string>
-    <string name="login_user_name_is_null">请输入Email或手机号</string>
+    <string name="text_forget_psw">忘记密码</string>
+    <string name="login_user_name_is_null">请输入邮箱</string>
     <string name="login_password_is_null">请输入密码</string>
+
+    <!-- 注册 -->
+    <string name="register_email">注册邮箱</string>
+    <string name="register_password">输入密码</string>
+    <string name="register_password_confirm">确认密码</string>
+    <string name="register_confirm_password_is_null">请输入确认密码</string>
+    <string name="regitster_confirm_false">两次密码不一致，请重新输入</string>
 
     <!-- kindle摄影区 -->
     <string name="title_activity_camera">照片墙</string>

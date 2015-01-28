@@ -5,4 +5,6 @@ package com.kindleren.kandouwo.user;
  */
 public interface AccountProvider {
     public long getUserId();
+
+    public String getToken();
 }

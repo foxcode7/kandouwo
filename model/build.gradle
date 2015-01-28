@@ -1,18 +1,18 @@
 apply plugin: 'java'
 
 repositories{
-    maven {
-        url "http://nexus:8081/nexus/content/groups/public"
-    }
-    maven {
-        url "http://nexus:8081/nexus/content/groups/public-snapshots"
-    }
-    mavenLocal()
+//    maven {
+//        url "http://nexus:8081/nexus/content/groups/public"
+//    }
+//    maven {
+//        url "http://nexus:8081/nexus/content/groups/public-snapshots"
+//    }
+//    mavenLocal()
+    mavenCentral()
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile group: 'com.google.android', name: 'android', version: '4.1.1.4'
     compile 'com.google.code.gson:gson:2.1'
-    compile 'de.greenrobot:dao:1.2'
 }

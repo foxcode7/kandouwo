@@ -15,12 +15,16 @@ buildscript {
 allprojects {
     version = '0.0.1'
     repositories {
+//        maven {
+//            url "http://nexus:8081/nexus/content/groups/public"
+//        }
+//        maven {
+//            url "http://nexus:8081/nexus/content/groups/public-snapshots"
+//        }
+//        mavenLocal()
         maven {
-            url "http://nexus:8081/nexus/content/groups/public"
+            url "http://dl.bintray.com/populov/maven"
         }
-        maven {
-            url "http://nexus:8081/nexus/content/groups/public-snapshots"
-        }
-        mavenLocal()
+        mavenCentral()
     }
 }

@@ -13,6 +13,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.inject.Inject;
@@ -22,7 +23,7 @@ import com.kandouwo.model.datarequest.login.User;
 import com.kindleren.kandouwo.R;
 import com.kindleren.kandouwo.base.AbstractModelAsyncTask;
 import com.kindleren.kandouwo.base.BaseAuthenticatedFragment;
-import com.kindleren.kandouwo.base.BaseFragment;
+import com.kindleren.kandouwo.register.RegisterActivity;
 
 import roboguice.inject.InjectView;
 
@@ -40,6 +41,8 @@ public class LoginFragment extends BaseAuthenticatedFragment implements View.OnC
     private Button buttonLogin;
     @InjectView(R.id.login_progress)
     private ProgressBar progressBarLogin;
+    @InjectView(R.id.register)
+    private TextView buttonRegister;
     @Inject
     private LayoutInflater inflater;
     @Inject
@@ -57,6 +60,7 @@ public class LoginFragment extends BaseAuthenticatedFragment implements View.OnC
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         buttonLogin.setOnClickListener(this);
+        buttonRegister.setOnClickListener(this);
         initEditText();
     }
 
@@ -88,8 +92,17 @@ public class LoginFragment extends BaseAuthenticatedFragment implements View.OnC
             case R.id.btn_login:
                 login();
                 break;
+            case R.id.register:
+                goToregister();
+                break;
 
         }
+    }
+
+    private void goToregister() {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), RegisterActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -141,9 +154,6 @@ public class LoginFragment extends BaseAuthenticatedFragment implements View.OnC
     }
 
     private void onLoginSuccess(User user) {
-        if (progressBarLogin != null) {
-            progressBarLogin.setVisibility(View.GONE);
-        }
         this.user = user;
         userCenter.login(user);
 

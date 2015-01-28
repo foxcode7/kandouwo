@@ -14,6 +14,8 @@
 
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- 获取电话状态，取得deviceid -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".KandouwoApplication"
@@ -55,6 +57,11 @@
             android:launchMode="standard"
             android:screenOrientation="portrait" >
         </activity>
+        <activity android:name=".register.RegisterActivity"
+            android:label="@string/text_register"
+            android:screenOrientation="portrait">
+        </activity>
+
         <activity
             android:name=".camera.CameraActivity"
             android:label="@string/title_activity_camera" >
@@ -78,11 +85,10 @@
             android:launchMode="standard"
             android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name=".search.SearchResultActivity"
-            android:screenOrientation="portrait"
-        />
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
