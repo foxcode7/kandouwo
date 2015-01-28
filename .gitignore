@@ -1,7 +1,6 @@
 release
 target
 build
-libs
 .settings
 .project
 .classpath
